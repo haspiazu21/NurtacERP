@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Mantenimiento Sucursal</title>
+    </h:head>
+    <h:body>
+        <h:form id="FrmRoles">
+
+            <h:panelGrid columns="4">
+                <p:commandButton id="btnNuevo" value="Nuevo" icon="fa fa-plus-circle" iconPos="right"/>
+                <p:commandButton id="btnAnular" value="Anular" icon="fa fa-times-circle-o" iconPos="right"/>
+                <p:commandButton id="btnEliminar" value="Eliminar" icon="fa fa-trash" iconPos="right"/>
+                <p:commandButton id="btnSalir" value="Salir"  icon="fa fa-reply" iconPos="right"/>
+            </h:panelGrid>
+
+
+            <p:fieldset  legend="Administrar Sucursal" style="margin-top: 30px">      
+
+                <p:dataTable var="sucur" value="#{mantenimientoSucursalMB.listsucursal}" sortBy="#{sucur.sucursalid}" selectionMode="single" selection="#{mantenimientoSucursalMB.sucursal}" rowKey="#{sucur.sucursalid}">
+                    <p:ajax event="rowSelect" listener="#{mantenimientoSucursalMB.onRowSelect}" update=":frmContent:pnlContent"/>
+
+                    <p:column headerText="Codigo">
+                        <h:outputLabel value="#{sucur.sucursalid}" />
+                    </p:column>
+
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{sucur.nombre}" />   
+                    </p:column>
+
+                    <p:column headerText="Dirección">
+                        <h:outputText value="#{sucur.direccion}" />
+                    </p:column>
+
+                    <p:column headerText="Teléfono">
+                        <h:outputText value="#{sucur.telefono}" />
+                    </p:column>
+
+                    <p:column headerText="Correo Electrónico">
+                        <h:outputText value="#{sucur.email}" />
+                    </p:column>
+
+                    <p:column headerText="Estado">
+                        <h:outputText value="#{sucur.estado}" />
+                    </p:column>
+                </p:dataTable>  
+            </p:fieldset> 
+
+            <p:fieldset  legend="Nueva Sucursal/ Editar Sucursal" style="margin-top: 10px;width: auto">
+                <h:panelGrid id="panelRol" columns="2" columnClasses="rotulo, campo">
+                                       
+                    <p:outputLabel  value = "Empresa" />
+                    <p:selectOneMenu  value="#{mantenimientoSucursalMB.sucursal.empresa}" style="width: 88%">
+                        <f:selectItem itemLabel="Nurtac" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel  value = "Codigo"/>
+                    <p:inputText value="#{mantenimientoSucursalMB.sucursal.sucursalid}" readonly="true" size="30" disabled="true" maxlength="50"/>
+
+                    <p:outputLabel  value = "Nombre"/>
+                    <p:inputText value="#{mantenimientoSucursalMB.sucursal.nombre}" readonly="true" size="30" maxlength="50"/>
+
+                    <p:outputLabel  value = "Dirección" />
+                    <p:inputText value="#{mantenimientoSucursalMB.sucursal.direccion}" readonly="true" size="30" maxlength="50"/>
+
+                    <p:outputLabel  value = "Telefono" />
+                    <p:inputText value="#{mantenimientoSucursalMB.sucursal.telefono}" readonly="true" size="30" maxlength="50"/>
+
+                    <p:outputLabel  value = "Correo Electrónico" />
+                    <p:inputText value="#{mantenimientoSucursalMB.sucursal.email}" readonly="true" size="30" maxlength="50"/>
+
+                    <p:outputLabel  value = "Estado" />
+                    <p:inputText value="#{mantenimientoSucursalMB.sucursal.estado}" readonly="true" size="30" maxlength="50"/>
+
+                    <p:commandButton id="btnGuardar" value="Guardar" icon="fa fa-save" iconPos="right"/>
+                    <p:commandButton id="btnCancelar" value="Cancelar" icon="fa fa-remove" iconPos="right"/>    
+                </h:panelGrid>
+            </p:fieldset>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+
+    </h:head>
+    <h:body>
+
+        <h:form id="frmMantenimiento">
+
+
+            <p:growl id="growl" showDetail="false" sticky="false"  />  
+            <h:panelGrid columns="4">
+                <p:commandButton id="btnNuevo" value="Nuevo" actionListener="#{mantenimientoUsuarioMB.limpiar()}" update=":frmContent:frmMantenimiento" process=":frmContent:frmMantenimiento" icon="fa fa-plus-circle" iconPos="right"/>
+                <p:commandButton id="btnAnular" value="Anular" actionListener="#{mantenimientoUsuarioMB.anular}" update=":frmContent:frmMantenimiento" process=":frmContent:frmMantenimiento" icon="fa fa-times-circle-o" iconPos="right">
+                    <p:confirm header="Confirmation de Acción" message="¿Desea anular el usuario?" icon="fa fa-exclamation-triangle" />
+                </p:commandButton>
+                <p:commandButton id="btnEliminar" value="Eliminar" actionListener="#{mantenimientoUsuarioMB.eliminar}" update=":frmContent:frmMantenimiento" process=":frmContent:frmMantenimiento" icon="fa fa-trash" iconPos="right">
+                    <p:confirm header="Confirmation de Acción" message="¿Desea eliminar el usuario?" icon="fa fa-exclamation-triangle" />
+                </p:commandButton>
+                <p:commandButton id="btnSalir" value="Salir"  icon="fa fa-reply" iconPos="right"/>
+            </h:panelGrid>
+
+            <p:fieldset legend="Usuarios" style="margin-top: 30px">
+                <p:dataTable var="usu" value="#{mantenimientoUsuarioMB.usuarioData.usuarios}" sortBy="#{usu.id}" selectionMode="single" selection="#{mantenimientoUsuarioMB.usuarioData.seleccion}" rowKey="#{usu.id}">
+                    <p:ajax event="rowSelect" listener="#{mantenimientoUsuarioMB.onRowSelect}" update=":frmContent:frmMantenimiento:pnlMantenimiento" />
+
+                    <p:column headerText="Codigo">
+                        <p:outputLabel value="#{usu.id}" />
+                    </p:column>
+                    <p:column headerText="Nombre">
+                        <p:outputLabel value="#{usu.nombre}" />
+                    </p:column>
+                    <p:column headerText="Usuario">
+                        <p:outputLabel value="#{usu.usuario}" />
+                    </p:column>
+                    <p:column headerText="Grupo de Usuario">
+                        <p:outputLabel value="#{usu.grupousuario.nombre}" />
+                    </p:column>
+                    <p:column headerText="Sucursal">
+                        <p:outputLabel value="#{usu.sucursal.nombre}" />
+                    </p:column>
+                    <p:column headerText="Estado">
+                        <p:outputLabel value="#{usu.estado}" />
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+
+
+            <p:fieldset legend="Nuevo/Editar Usuario" style="margin-top: 30px;width: min-content" >
+
+                <h:panelGrid id="pnlMantenimiento" columns="2" >
+
+
+                    <p:outputLabel for="txtCodigo" value="Código:"/>
+                    <p:inputText id="txtCodigo" value="#{mantenimientoUsuarioMB.usuarioData.usuario.id}" size="3" readonly="true" maxlength="100"/>
+
+                    <p:outputLabel for="txtNombre" value="Nombre:"/>
+                    <p:inputText id="txtNombre"  value="#{mantenimientoUsuarioMB.usuarioData.usuario.nombre}" size="30" maxlength="100"/>
+
+                    <p:outputLabel for="cmbEmpresa" value="Empresa:"/>
+                    <p:selectOneMenu id="cmbEmpresa" value="#{mantenimientoUsuarioMB.usuarioData.usuario.empresa}" required="true" requiredMessage="Necesita seleccionar una Empresa" style="width: 88%" converter="omnifaces.SelectItemsConverter">
+                        <p:ajax listener="#{mantenimientoUsuarioMB.onEmpresaChange}" update="cmbSucursal" />
+                        <f:selectItem itemValue="" itemLabel="Seleccione Empresa" noSelectionOption="true"/>
+                        <f:selectItems value="#{mantenimientoUsuarioMB.usuarioData.empresas}" var="em"
+                                       itemLabel="#{em.nombre}" itemValue="#{em}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="cmbSucursal" value="Sucursal:"/>
+                    <p:selectOneMenu id="cmbSucursal" value="#{mantenimientoUsuarioMB.usuarioData.usuario.sucursal}" required="true" requiredMessage="Necesita seleccionar una Sucursal" style="width: 88%" converter="omnifaces.SelectItemsConverter">
+                        <f:selectItem itemValue="" itemLabel="Seleccione Sucursal" noSelectionOption="true"/>
+                        <f:selectItems value="#{mantenimientoUsuarioMB.usuarioData.sucursales}" var="su"
+                                       itemLabel="#{su.nombre}" itemValue="#{su}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="cmbGrupoUsuario" value="Grupo De Usuario:"/>
+                    <p:selectOneMenu id="cmbGrupoUsuario" value="#{mantenimientoUsuarioMB.usuarioData.usuario.grupousuario}" style="width: 88%" converter="omnifaces.SelectItemsConverter">
+                        <f:selectItem itemValue="" itemLabel="Seleccione Grupo de Usuario" noSelectionOption="true"/>
+                        <f:selectItems value="#{mantenimientoUsuarioMB.usuarioData.gruposUsuarios}" var="gu"
+                                       itemLabel="#{gu.nombre}" itemValue="#{gu}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="txtUsuario" value="Usuario:"/>
+                    <p:inputText id="txtUsuario" value="#{mantenimientoUsuarioMB.usuarioData.usuario.usuario}" size="30" maxlength="100">
+                        <f:validateLength minimum="5" maximum="16" />
+                        <p:clientValidator />
+                    </p:inputText>
+
+                    <p:outputLabel for="txtContraseña" value="Contraseña:"/>
+                    <p:password id="txtContraseña" value="#{mantenimientoUsuarioMB.usuarioData.usuario.contrasena}" redisplay="true" size="30" maxlength="100">
+                        <f:validateLength minimum="6" maximum="16" />
+                        <p:clientValidator />
+                    </p:password> 
+
+                    <p:commandButton id="btnGuardar" value="Guardar" validateClient="true" actionListener="#{mantenimientoUsuarioMB.grabar}" update=":frmContent:frmMantenimiento" process=":frmContent:frmMantenimiento"  icon="fa fa-save" iconPos="right" >
+                        <p:confirm header="Confirmation de Acción" message="¿Desea guardar el usuario?" icon="fa fa-exclamation-triangle" />
+                    </p:commandButton>
+                    <p:commandButton id="btnCancelar" value="Cancelar" icon="fa fa-remove" iconPos="right"/>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+                    </p:confirmDialog> 
+
+                </h:panelGrid> 
+
+            </p:fieldset>
+
+
+
+            <p:dialog id="myDialogID" widgetVar="myDialogVar">
+
+            </p:dialog>
+
+        </h:form>
+    </h:body>
+</html>

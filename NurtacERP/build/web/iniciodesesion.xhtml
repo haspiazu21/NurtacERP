@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Inicio De Sesion</title>
+        <h:outputStylesheet library="css" name="materialize.min.css"/>
+        <h:outputScript library="js" name="jquery-3.4.1.min.js"/>
+        <h:outputScript library="js" name="materialize.min.js"/>
+
+        
+    </h:head>
+    <h:body styleClass="light-blue lighten-5">
+        <div class="valign-wrapper" id="login-page">
+            <div class="container">
+                <div class="center-align">
+                    <div class="row">
+                        <div class="col s6 offset-s3">
+                            <div class="card">
+                                <div class="card-content">
+                                    <h:graphicImage class="responsive-img" style="max-width: 64px" value="/resources/img/nurtac.jpg"/>
+                                    <div class="left-align">
+                                        <h:form id="iniciodesesion" prependId="false">
+                                            <p:growl autoUpdate="true"/>
+                                            <div class="row">
+                                                <div class="col s12 input-field">
+
+                                                    <p:inputText id="txtUsername" value="#{menuMB.username}" size="10" maxlength="10"/>
+                                                    <p:outputLabel for="txtUsername"  value="Usuario:"/>
+                                                </div>
+                                                <div class="col s12 input-field">    
+                                                    <p:password id="txtPassword" value="#{menuMB.password}" size="10" maxlength="10"/> 
+                                                    <p:outputLabel for="txtPassword" value="Contraseña:"/>
+                                                </div>
+                                                <div class="col s12 center">    
+                                                    <p:commandButton id="btnInicio" value="Iniciar Sesion" action="#{menuMB.logIn()}"/>
+                                                </div>
+                                            </div>
+                                        </h:form>
+                                    </div>
+                                </div>                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(document).on("ready", function () {
+                $('#login-page').css({'height': window.innerHeight + 'px'});
+            });
+        </script>
+
+    </h:body>
+</html>
+

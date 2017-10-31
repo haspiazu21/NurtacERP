@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+
+    </h:head>
+    <h:body>
+        <h:form id="frmMantenimiento">
+
+            <p:growl id="growl" showDetail="false" sticky="false"  /> 
+            <h:panelGrid columns="4">
+                <p:commandButton id="btnNuevo" value="Nuevo" validateClient="true" actionListener="#{mantenimientoGrupoMB.limpiar}" update=":frmContent:frmMantenimiento" process=":frmContent:frmMantenimiento" icon="fa fa-plus-circle" iconPos="right"/>
+                <p:commandButton id="btnAnular" value="Anular" validateClient="true" actionListener="#{mantenimientoGrupoMB.anular}" update=":frmContent:frmMantenimiento" process=":frmContent:frmMantenimiento" icon="fa fa-times-circle-o" iconPos="right">
+                    <p:confirm header="Confirmation de Acción" message="¿Desea anular el grupo de usuario?" icon="fa fa-exclamation-triangle" />
+                </p:commandButton>
+                <p:commandButton id="btnEliminar" value="Eliminar" validateClient="true" actionListener="#{mantenimientoGrupoMB.eliminar}" update=":frmContent:frmMantenimiento" process=":frmContent:frmMantenimiento" icon="fa fa-trash" iconPos="right">
+                    <p:confirm header="Confirmation de Acción" message="¿Desea eliminar el grupo de usuario?" icon="fa fa-exclamation-triangle" />
+                </p:commandButton>
+                <p:commandButton id="btnSalir" value="Salir"  icon="fa fa-reply" iconPos="right"/>
+            </h:panelGrid>
+
+
+            <p:fieldset legend="Grupos de Usuarios" style="margin-top: 30px">
+
+                <p:dataTable var="gu" value="#{mantenimientoGrupoMB.mantGrpUsrDataMB.gruposUsuarios}" sortBy="#{gu.id}" selectionMode="single" selection="#{mantenimientoGrupoMB.mantGrpUsrDataMB.seleccion}" rowKey="#{gu.id}">
+                    <p:ajax event="rowSelect" listener="#{mantenimientoGrupoMB.onRowSelect}" update=":frmContent:frmMantenimiento:pnlMantenimiento" />
+                    <p:column headerText="Nombre">
+                        <h:outputLabel value="#{gu.nombre}" />
+                    </p:column>
+                    <p:column headerText="Descripción">
+                        <h:outputLabel value="#{gu.descripcion}" />
+                    </p:column>
+                    <p:column headerText="Estado">
+                        <h:outputLabel value="#{gu.estado}" />
+                    </p:column>
+                </p:dataTable>
+
+            </p:fieldset>
+
+            <p:fieldset legend="Nuevo/Editar Grupo de Usuario" style="margin-top: 10px;width: min-content">
+                <h:panelGrid id="pnlMantenimiento" columns="2">
+
+                    <p:outputLabel for="txtCodigo" value = "Código"/>
+                    <p:inputText id="txtCodigo" value="#{mantenimientoGrupoMB.mantGrpUsrDataMB.grupoUsuario.id}" readonly="true" size="3" disabled="true" maxlength="30"/>
+                    <p:outputLabel for="txtNombre" value = "Nombre"/>
+                    <p:inputText id="txtNombre" value="#{mantenimientoGrupoMB.mantGrpUsrDataMB.grupoUsuario.nombre}" size="30" maxlength="30"/>
+                    <p:outputLabel for="txtDescripcion"  value = "Descripcion"/>
+                    <p:inputTextarea id="txtDescripcion" value="#{mantenimientoGrupoMB.mantGrpUsrDataMB.grupoUsuario.descripcion}" rows="5" cols="30" maxlength="30"/>
+
+                    <p:commandButton id="btnGuardar" value="Guardar" validateClient="true" actionListener="#{mantenimientoGrupoMB.grabar}" update=":frmContent:frmMantenimiento" process=":frmContent:frmMantenimiento" icon="fa fa-save" iconPos="right">
+                        <p:confirm header="Confirmation de Acción" message="¿Desea guardar el grupo de usuario?" icon="fa fa-exclamation-triangle" />
+                    </p:commandButton>
+                    <p:commandButton id="btnCancelar" value="Cancelar" icon="fa fa-remove" iconPos="right"/>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sí" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+                    </p:confirmDialog> 
+
+                </h:panelGrid>    
+            </p:fieldset>
+
+
+
+            <p:dialog id="myDialogID" widgetVar="myDialogVar">
+
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>

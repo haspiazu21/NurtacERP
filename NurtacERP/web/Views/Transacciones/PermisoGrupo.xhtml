@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="frmAsignar">
+
+            <h:panelGrid columns="4">
+                <p:commandButton id="btnNuevo" value="Nuevo" icon="fa fa-plus-circle" iconPos="right"/>
+                <p:commandButton id="btnAnular" value="Anular" icon="fa fa-times-circle-o" iconPos="right"/>
+                <p:commandButton id="btnEliminar" value="Eliminar" icon="fa fa-trash" iconPos="right"/>
+                <p:commandButton id="btnSalir" value="Salir"  icon="fa fa-reply" iconPos="right"/>
+            </h:panelGrid>
+
+
+            <p:fieldset legend="Grupos de Usuarios" style="margin-top: 30px">
+
+                <p:dataTable var="gu" value="#{permisoGrupoMB.permGrpDataMB.gruposUsuarios}" sortBy="#{gu.id}" selectionMode="single" selection="#{permisoGrupoMB.permGrpDataMB.seleccion}" rowKey="#{gu.id}">
+                    <p:ajax event="rowSelect" listener="#{permisoGrupoMB.onRowSelect}" update=":frmContent:pnlContent" />
+                    <p:column headerText="Nombre">
+                        <h:outputLabel value="#{gu.nombre}" />
+                    </p:column>
+                    <p:column headerText="Descripción">
+                        <h:outputLabel value="#{gu.descripcion}" />
+                    </p:column>
+                    <p:column headerText="Estado">
+                        <h:outputLabel value="#{gu.estado}" />
+                    </p:column>
+                </p:dataTable>
+
+            </p:fieldset>
+
+            <p:fieldset legend="Editar Permisos" style="margin-top: 10px;width: fit-content">
+                <h:panelGrid id="pnlMantenimiento" columns="2">
+                    <p:outputLabel  value = "Código"/>
+                    <p:inputText value="#{permisoGrupoMB.permGrpDataMB.seleccion.id}" readonly="true" size="3" disabled="true" maxlength="30"/>
+                    <p:outputLabel  value = "Nombre"/>
+                    <p:inputText value="#{permisoGrupoMB.permGrpDataMB.seleccion.nombre}" readonly="true" disabled="true" size="30" maxlength="30"/>
+                </h:panelGrid>    
+
+                <p:fieldset  legend="Permisos" style="margin-top: 10px;width: fit-content">
+                    <p:dataTable id="tblPermisos" var="pg" value="#{permisoGrupoMB.permGrpDataMB.paginas}" sortBy="#{pg.modulo}" expandableRowGroups="true" >
+                        <f:facet name="header">
+                            Permisos
+                        </f:facet>
+                        <p:headerRow>
+                            <p:column colspan="8">
+                                <h:outputLabel value="#{pg.modulo}" />
+                            </p:column>
+                        </p:headerRow>
+                        <p:column headerText="Permiso" style="text-align: center">
+                            <p:selectBooleanCheckbox id="chkAsignar" value="#{pg.permiso.asignado}">
+                                <p:ajax update=":frmContent:frmAsignar:tblPermisos" process=":frmContent:frmAsignar:tblPermisos" listener="#{permisoGrupoMB.resetearChecks(pg)}" />
+                            </p:selectBooleanCheckbox>
+                        </p:column>
+                        <p:column headerText="Descripción">
+                            <p:outputLabel value="#{pg.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Guardar" style="text-align: center">
+                            <p:selectBooleanCheckbox id="chkGuardar" disabled="#{permisoGrupoMB.getState(pg, 3)}"  value="#{pg.permiso.guardar}"/>
+                        </p:column>
+                        <p:column headerText="Buscar" style="text-align: center">
+                            <p:selectBooleanCheckbox id="chkBuscar" disabled="#{permisoGrupoMB.getState(pg, 4)}" value="#{pg.permiso.buscar}"/>
+                        </p:column>
+                        <p:column headerText="Modificar" style="text-align: center">
+                            <p:selectBooleanCheckbox id="chkModificar" disabled="#{permisoGrupoMB.getState(pg, 5)}" value="#{pg.permiso.modificar}"/>
+                        </p:column>
+                        <p:column headerText="Imprimir" style="text-align: center">
+                            <p:selectBooleanCheckbox id="chkImprimir" disabled="#{permisoGrupoMB.getState(pg, 6)}" value="#{pg.permiso.imprimir}"/>
+                        </p:column>
+                        <p:column headerText="Anular" style="text-align: center">
+                            <p:selectBooleanCheckbox id="chAnular" disabled="#{permisoGrupoMB.getState(pg, 7)}" value="#{pg.permiso.anular}"/>
+                        </p:column>
+                        <p:column headerText="Eliminar" style="text-align: center">
+                            <p:selectBooleanCheckbox id="chkEliminar" disabled="#{permisoGrupoMB.getState(pg, 8)}" value="#{pg.permiso.eliminar}"/>
+                        </p:column>
+
+                    </p:dataTable>
+
+
+                </p:fieldset>
+
+                <p:commandButton id="btnGuardar" value="Aceptar"  icon="fa fa-save" actionListener="#{permisoGrupoMB.guardar()}" process=":frmContent:frmAsignar" iconPos="right" update=":frmContent:frmAsignar" />
+                <p:commandButton id="btnCancelar" value="Cancelar" icon="fa fa-remove" iconPos="right"/>
+            </p:fieldset>
+        </h:form>
+    </h:body>
+</html>
+
