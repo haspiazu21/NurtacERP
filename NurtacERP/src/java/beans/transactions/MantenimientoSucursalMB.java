@@ -5,8 +5,8 @@
  */
 package beans.transactions;
 
-import ModuloGen.modelo.Empresa;
-import ModuloGen.modelo.Sucursal;
+import modelo.general.Empresa;
+import modelo.general.Sucursal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;

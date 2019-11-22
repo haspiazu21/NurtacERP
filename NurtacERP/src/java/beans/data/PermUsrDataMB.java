@@ -10,8 +10,8 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import ModuloSeg.modelo.Page;
-import ModuloSeg.modelo.Usuario;
+import modelo.seguridad.Page;
+import modelo.seguridad.Usuario;
 
 /**
  *

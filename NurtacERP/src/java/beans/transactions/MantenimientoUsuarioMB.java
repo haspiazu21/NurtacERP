@@ -1,27 +1,27 @@
 package beans.transactions;
 
 
-import java.io.Serializable;
-
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.primefaces.PrimeFaces;
-import org.primefaces.event.SelectEvent;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 import beans.data.MantUsuarioDataMB;
-import ModuloGen.facade.FacadeMantUsuario;
-import ModuloGen.facade.IFacadeMantUsuario;
-import ModuloGen.modelo.Empresa;
-import ModuloSeg.modelo.Usuario;
+import facade.FacadeMantUsuario;
+import modelo.general.Empresa;
+import modelo.seguridad.Usuario;
+
+import java.io.Serializable;
+import javax.annotation.PostConstruct;
+import org.primefaces.event.SelectEvent;
+import facade.IFacadeMantUsuario;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -33,15 +33,15 @@ public class MantenimientoUsuarioMB implements Serializable {
 
     @Inject
     private MantUsuarioDataMB usuarioData;
-    private IFacadeMantUsuario FacadeMantUsuario;
+    private IFacadeMantUsuario facadeMantUsuario;
 
     @PostConstruct
     public void init() {
         usuarioData.setUsuario(new Usuario());
-        FacadeMantUsuario = new FacadeMantUsuario();
-        usuarioData.setEmpresas(FacadeMantUsuario.findAllEmpresas());
-        usuarioData.setGruposUsuarios(FacadeMantUsuario.findAllGruposUsuarios());
-        usuarioData.setUsuarios(FacadeMantUsuario.findAllUsuarios());
+        facadeMantUsuario = new FacadeMantUsuario();
+        usuarioData.setEmpresas(facadeMantUsuario.findAllEmpresas());
+        usuarioData.setGruposUsuarios(facadeMantUsuario.findAllGruposUsuarios());
+        usuarioData.setUsuarios(facadeMantUsuario.findAllUsuarios());
 
     }
 
@@ -61,7 +61,7 @@ public class MantenimientoUsuarioMB implements Serializable {
 
         Empresa empresa = usuarioData.getSeleccion().getEmpresa();
         if (empresa != null) {
-            usuarioData.setSucursales(FacadeMantUsuario.findSucursalesByEmpresa(empresa.getId()));
+            usuarioData.setSucursales(facadeMantUsuario.findSucursalesByEmpresa(empresa.getId()));
         }
         usuarioData.setUsuario(usuarioData.getSeleccion());
         //System.out.println(usuarioData.getSeleccion().toString());
@@ -71,13 +71,13 @@ public class MantenimientoUsuarioMB implements Serializable {
     public void onEmpresaChange() {
         Empresa empresa = usuarioData.getUsuario().getEmpresa();
         if (empresa != null) {
-            usuarioData.setSucursales(FacadeMantUsuario.findSucursalesByEmpresa(empresa.getId()));
+            usuarioData.setSucursales(facadeMantUsuario.findSucursalesByEmpresa(empresa.getId()));
         }
     }
 
     public void grabar() {
         try {
-            FacadeMantUsuario.guardarUsuario(usuarioData.getUsuario());
+            facadeMantUsuario.guardarUsuario(usuarioData.getUsuario());
             FacesMessage message = new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
                     "Operación Exitosa",
@@ -94,13 +94,13 @@ public class MantenimientoUsuarioMB implements Serializable {
     public void limpiar() {
         usuarioData.setSeleccion(null);
         usuarioData.setUsuario(null);
-        usuarioData.setUsuarios(FacadeMantUsuario.findAllUsuarios());
+        usuarioData.setUsuarios(facadeMantUsuario.findAllUsuarios());
     }
 
     public void anular() {
         try {
             usuarioData.getUsuario().setEstado("Inactivo");
-            FacadeMantUsuario.guardarUsuario(usuarioData.getUsuario());
+            facadeMantUsuario.guardarUsuario(usuarioData.getUsuario());
             FacesMessage message = new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
                     "Operación Exitosa",
@@ -116,7 +116,7 @@ public class MantenimientoUsuarioMB implements Serializable {
 
     public void eliminar() {
         try {
-            FacadeMantUsuario.eliminarUsuario(usuarioData.getUsuario());
+            facadeMantUsuario.eliminarUsuario(usuarioData.getUsuario());
             FacesMessage message = new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
                     "Operación Exitosa",

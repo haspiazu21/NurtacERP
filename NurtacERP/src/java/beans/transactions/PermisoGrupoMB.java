@@ -6,9 +6,9 @@
 package beans.transactions;
 
 import beans.data.PermGrpDataMB;
-import ModuloGen.facade.FacadePermGrupo;
-import ModuloGen.facade.IFacadePermGrupo;
-import ModuloSeg.modelo.Page;
+import facade.FacadePermGrupo;
+import facade.IFacadePermGrupo;
+import modelo.seguridad.Page;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import ModuloSeg.modelo.GrupoUsuario;
-import ModuloSeg.modelo.Permiso;
+import modelo.seguridad.GrupoUsuario;
+import modelo.seguridad.Permiso;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -25,19 +25,19 @@ import org.primefaces.event.SelectEvent;
  * @author Lenovo
  */
 @Named
-@javax.faces.bean.RequestScoped
+@RequestScoped
 public class PermisoGrupoMB implements Serializable {
 
     @Inject
     private PermGrpDataMB permGrpDataMB;
-    private IFacadePermGrupo FacadePermGrupo;
+    private IFacadePermGrupo facadePermGrupo;
 
     @PostConstruct
     public void init() {
 
-        FacadePermGrupo = new FacadePermGrupo();
+        facadePermGrupo = new FacadePermGrupo();
 
-        permGrpDataMB.setGruposUsuarios(FacadePermGrupo.getAllGruposUsuarios());
+        permGrpDataMB.setGruposUsuarios(facadePermGrupo.getAllGruposUsuarios());
     }
 
     public PermisoGrupoMB() {
@@ -53,7 +53,7 @@ public class PermisoGrupoMB implements Serializable {
 
     public void onRowSelect(SelectEvent event) {
         permGrpDataMB.setSeleccion((GrupoUsuario) event.getObject());
-        permGrpDataMB.setPaginas(FacadePermGrupo.getAllPermisosGrupo(permGrpDataMB.getSeleccion()));
+        permGrpDataMB.setPaginas(facadePermGrupo.getAllPermisosGrupo(permGrpDataMB.getSeleccion()));
 
     }
 
@@ -107,7 +107,7 @@ public class PermisoGrupoMB implements Serializable {
     }
 
     public void guardar() {
-        FacadePermGrupo.guardarPermisos(permGrpDataMB.getPaginas(), permGrpDataMB.getSeleccion());
+        facadePermGrupo.guardarPermisos(permGrpDataMB.getPaginas(), permGrpDataMB.getSeleccion());
 //        for(Page page : permGrpDataMB.getPaginas()){
 //            System.err.println(page.getNombre().toUpperCase());
 //            System.err.println("Asignado:" + page.getPermiso().getAsignado());

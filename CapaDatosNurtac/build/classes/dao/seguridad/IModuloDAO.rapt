@@ -1,0 +1,13 @@
+entities/seguridad/SegMenus_.java
+entities/general/GenSucursales_.java
+entities/seguridad/SegBitacora_.java
+entities/seguridad/SegTiposmenu_.java
+entities/general/GenGenerales_.java
+entities/seguridad/SegPermisosusuariosPK_.java
+entities/seguridad/SegPermisosgruposPK_.java
+entities/seguridad/SegGruposusuarios_.java
+entities/seguridad/SegPermisosusuarios_.java
+entities/seguridad/SegPermisosgrupos_.java
+entities/seguridad/SegModulos_.java
+entities/seguridad/SegUsuarios_.java
+entities/general/GenEmpresas_.java

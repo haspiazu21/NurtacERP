@@ -2,25 +2,26 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="CapaDatosPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>ModuloGen.entities.GenEmpresas</class>
-    <class>ModuloGen.entities.GenGenerales</class>
-    <class>ModuloGen.entities.GenSucursales</class>
-    <class>ModuloSeg.entities.SegBitacora</class>
-    <class>ModuloSeg.entities.SegGruposusuarios</class>
-    <class>ModuloSeg.entities.SegMenus</class>
-    <class>ModuloSeg.entities.SegModulos</class>
-    <class>ModuloSeg.entities.SegPermisosgrupos</class>
-    <class>ModuloSeg.entities.SegPermisosusuarios</class>
-    <class>ModuloSeg.entities.SegTiposmenu</class>
-    <class>ModuloSeg.entities.SegUsuarios</class>
+    <class>entities.general.GenEmpresas</class>
+    <class>entities.general.GenSucursales</class>
+    <class>entities.general.GenGenerales</class>
+    <class>entities.seguridad.SegPermisosgrupos</class>
+    <class>entities.seguridad.SegBitacora</class>
+    <class>entities.seguridad.SegMenus</class>
+    <class>entities.seguridad.SegGruposusuarios</class>
+    <class>entities.seguridad.SegModulos</class>
+    <class>entities.seguridad.SegUsuarios</class>
+    <class>entities.seguridad.SegPermisosusuarios</class>
+    <class>entities.seguridad.SegTiposmenu</class>
+    <validation-mode>NONE</validation-mode>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Nurtac"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="postgres"/>
+      <property name="javax.persistence.jdbc.password" value="1234"/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      <property name="javax.persistence.lock.timeout" value="30"/>
-      <property name="hibernate.show_sql" value="0"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
     </properties>
   </persistence-unit>
 </persistence>

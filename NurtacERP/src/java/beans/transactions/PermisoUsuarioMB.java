@@ -6,16 +6,16 @@
 package beans.transactions;
 
 import beans.data.PermUsrDataMB;
-import ModuloGen.facade.FacadePermUsr;
-import ModuloGen.facade.IFacadePermUsr;
+import facade.FacadePermUsr;
+import facade.IFacadePermUsr;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import ModuloSeg.modelo.Page;
-import ModuloSeg.modelo.Usuario;
+import modelo.seguridad.Page;
+import modelo.seguridad.Usuario;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -28,12 +28,12 @@ public class PermisoUsuarioMB implements Serializable {
 
     @Inject
     private PermUsrDataMB permUsrDataMB;
-    private IFacadePermUsr FacadePermUsr;
+    private IFacadePermUsr facadePermUsr;
 
     @PostConstruct
     public void init() {
-        FacadePermUsr = new FacadePermUsr();
-        permUsrDataMB.setUsuarios(FacadePermUsr.getAllUsuarios());
+        facadePermUsr = new FacadePermUsr();
+        permUsrDataMB.setUsuarios(facadePermUsr.getAllUsuarios());
     }
 
     public PermisoUsuarioMB() {
@@ -48,16 +48,16 @@ public class PermisoUsuarioMB implements Serializable {
     }
 
     public IFacadePermUsr getFacadePermUsr() {
-        return FacadePermUsr;
+        return facadePermUsr;
     }
 
-    public void setFacadePermUsr(IFacadePermUsr FacadePermUsr) {
-        this.FacadePermUsr = FacadePermUsr;
+    public void setFacadePermUsr(IFacadePermUsr facadePermUsr) {
+        this.facadePermUsr = facadePermUsr;
     }
 
     public void onRowSelect(SelectEvent event) {
         permUsrDataMB.setSeleccion((Usuario) event.getObject());
-        permUsrDataMB.setPaginas(FacadePermUsr.getAllPermisosUsuario(permUsrDataMB.getSeleccion()));
+        permUsrDataMB.setPaginas(facadePermUsr.getAllPermisosUsuario(permUsrDataMB.getSeleccion()));
     }
 
     public void resetearChecks(Page page) {
@@ -110,7 +110,7 @@ public class PermisoUsuarioMB implements Serializable {
     }
 
     public void guardar() {
-        FacadePermUsr.guardarPermisos(permUsrDataMB.getPaginas(), permUsrDataMB.getSeleccion());
+        facadePermUsr.guardarPermisos(permUsrDataMB.getPaginas(), permUsrDataMB.getSeleccion());
         permUsrDataMB.setSeleccion(null);
         permUsrDataMB.setPaginas(new ArrayList<>());
     }

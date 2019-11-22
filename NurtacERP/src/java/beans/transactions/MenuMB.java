@@ -5,10 +5,10 @@
  */
 package beans.transactions;
 
-import ModuloGen.facade.FacadeSeguridad;
-import ModuloGen.facade.IFacadeSeguridad;
-import ModuloSeg.modelo.Menu;
-import ModuloSeg.modelo.MenuItem;
+import facade.FacadeSeguridad;
+import facade.IFacadeSeguridad;
+import modelo.seguridad.Menu;
+import modelo.seguridad.MenuItem;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -16,7 +16,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import ModuloSeg.modelo.Usuario;
+import modelo.seguridad.Usuario;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
@@ -35,7 +35,7 @@ public class MenuMB implements Serializable {
     private String username;
     private String password;
     private Usuario loggedUser;
-    private IFacadeSeguridad FacadeSeguridad;
+    private IFacadeSeguridad facadeSeguridad;
 
     /**
      * Creates a new instance of MenuMB
@@ -46,7 +46,7 @@ public class MenuMB implements Serializable {
     @PostConstruct
     public void init() {
 
-        FacadeSeguridad = new FacadeSeguridad();
+        facadeSeguridad = new FacadeSeguridad();
         selectedUrl = "/Index.xhtml";
 
     }
@@ -98,7 +98,7 @@ public class MenuMB implements Serializable {
 
     private void constructMenu() {
         dynamicMenu = new DefaultMenuModel();
-        List<Menu> menuList = FacadeSeguridad.getMenus(loggedUser);
+        List<Menu> menuList = facadeSeguridad.getMenus(loggedUser);
         for (Menu m : menuList) {
             DefaultSubMenu dfsm = new DefaultSubMenu(m.getNombre());
 
@@ -115,12 +115,12 @@ public class MenuMB implements Serializable {
 
     public String logIn() {
 
-        loggedUser = FacadeSeguridad.getLoggedUser(username, password);
+        loggedUser = facadeSeguridad.getLoggedUser(username, password);
         if (loggedUser != null) {
-            FacesContext.getCurrentInstance()
-                    .getExternalContext()
-                    .getSessionMap()
-                    .put("loggedUser", loggedUser);
+//            FacesContext.getCurrentInstance()
+//                    .getExternalContext()
+//                    .getSessionMap()
+//                    .put("loggedUser", loggedUser);
             constructMenu();
             return "home?faces-redirect=true";
         } else {
