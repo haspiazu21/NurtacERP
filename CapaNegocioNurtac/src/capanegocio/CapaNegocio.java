@@ -27,38 +27,36 @@ public class CapaNegocio {
      */
     public static void main(String[] args) {
 
-       // FactoryEM.inicializarFactory();
-//
+//        FactoryEM.inicializarFactory();
 //        IFacadePermGrupo f = new FacadePermGrupo();
+        
+/**Carga de Paginas y Verificacion de Acceso x Grupo*/
 
-//        List<Page> pages = f.getAllPermisosGrupo(new GrupoUsuario(2, "", "", ""));
+//        List<Page> pages = f.getAllPermisosGrupo(new GrupoUsuario(1, "", "", ""));
 //
 //        for (Page page : pages) {
 //            System.out.println("Menu: " + page.getNombre());
 //            System.out.println("Modulo: " + page.getModulo());
-//            System.out.println("Tiene Permiso: " + page.getPermiso().isAsignado());
+//            System.out.println("Tiene Permiso: " + page.getPermiso().getAsignado());
 //        }
+/**Guardar Permisos de Paginas x Grupo de Usuarios*/
 //        List<Page> pages = new ArrayList<>();
 //        Page pg = new Page();
-//        pg.setCodigo(2);
-//        pg.setModulo("asdasd");
-//        pg.setNombre("asadsd");
-//        pg.setPermiso(new Permiso(true, true, true, true, true, true, true));
+//        pg.setCodigo(4);
+//        pg.setModulo("Inventario");
+//        pg.setNombre("Inventario");
+//        pg.setPermiso(new Permiso(true, true, true, true, false, true, true));
 //        pages.add(pg);
-//
-//        f.guardarPermisos(pages, new GrupoUsuario(2, "", "", ""));
+//        f.guardarPermisos(pages, new GrupoUsuario(4, "", "", ""));
 //
 
-
+/**Creacion de Grupos de Usuarios desde la capa de Negocio*/
 //        IFacadeMantGrupoUsuario m = new FacadeMantGrupoUsuario();
-//        
 //        GrupoUsuario g = new GrupoUsuario();
-//        
-//        g.setDescripcion("asd");
-//        g.setNombre("Test");
-//        
+//        g.setDescripcion("Usuarios encargados de los servicios generales.");
+//        g.setNombre("Servicios Administrativos");
 //        m.guardarGrupoUsuario(g);
-//        
+       
 //
 //        FactoryEM.destruirFactory();
 

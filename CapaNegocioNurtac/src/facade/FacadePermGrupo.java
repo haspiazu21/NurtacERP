@@ -82,7 +82,7 @@ public class FacadePermGrupo implements IFacadePermGrupo {
     @Override
     public void guardarPermisos(List<Page> pages, GrupoUsuario grupoUsuario) {
         List<SegPermisosgrupos> permisosGrupos = new ArrayList<>();
-        System.err.println("llego hasta aqui:" + pages.size() + "este es el tamaño de la lista");
+        System.err.println("llego hasta aqui:" + pages.size() + " es el tamaño de la lista");
         for (Page page : pages) {
             System.err.println("Asignado:" + page.getPermiso().getAsignado());
             if (page.getPermiso().getAsignado()) {
