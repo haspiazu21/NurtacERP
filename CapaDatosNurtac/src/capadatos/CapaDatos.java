@@ -32,16 +32,18 @@ public class CapaDatos {
      */
     public static void main(String[] args) {
 
-        //     FactoryEM.inicializarFactory();
-//        IEmpresaDAO crud = new EmpresaDAO();
-//        GenEmpresas empresa = new GenEmpresas();
-//        empresa.setCedreplegal("999999999");
-//        empresa.setComercial("Asesoral");
-//        empresa.setEstado("A");
-//        empresa.setNombre("Asesoral");
-//        empresa.setReplegal("Xavier Moreira");
-//        
-//        crud.create(empresa);
+        FactoryEM.inicializarFactory();
+        IEmpresaDAO crud = new EmpresaDAO();
+        GenEmpresas empresa = new GenEmpresas();
+        empresa.setCedreplegal("0921078580");
+        empresa.setComercial("Fenix");
+        empresa.setEstado("A");
+        empresa.setNombre("Fenix");
+        empresa.setReplegal("Henry Aspiazu");
+        
+        crud.create(empresa);
+        System.out.println(empresa.toString());
+        
 //        GenEmpresas empresa2 = crud.find(2);
 //
 //        System.out.println(empresa2.toString());
@@ -59,7 +61,7 @@ public class CapaDatos {
 //            System.out.println(menu.getSegPermisosgruposList().size());
 //        }
 //        
-        // FactoryEM.destruirFactory();
+      FactoryEM.destruirFactory();
     }
 
 }
