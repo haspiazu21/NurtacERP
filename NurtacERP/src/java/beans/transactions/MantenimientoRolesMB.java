@@ -5,7 +5,7 @@
  */
 package beans.transactions;
 
-import ModuloSeg.modelo.Roles;
+import modelo.seguridad.Roles;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

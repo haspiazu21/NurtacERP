@@ -6,9 +6,9 @@
 package beans.transactions;
 
 import beans.data.MantGrpUsrDataMB;
-import ModuloGen.facade.FacadeMantGrupoUsuario;
-import ModuloGen.facade.IFacadeMantGrupoUsuario;
-import ModuloSeg.modelo.GrupoUsuario;
+import facade.FacadeMantGrupoUsuario;
+import facade.IFacadeMantGrupoUsuario;
+import modelo.seguridad.GrupoUsuario;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -28,7 +28,7 @@ public class MantenimientoGrupoMB implements Serializable {
 
     @Inject
     private MantGrpUsrDataMB mantGrpUsrDataMB;
-    private IFacadeMantGrupoUsuario FacadeMantGrupoUsuario;
+    private IFacadeMantGrupoUsuario facadeMantGrupoUsuario;
 
     public MantenimientoGrupoMB() {
 
@@ -37,8 +37,8 @@ public class MantenimientoGrupoMB implements Serializable {
     @PostConstruct
     public void init() {
         mantGrpUsrDataMB.setGrupoUsuario(new GrupoUsuario());
-        FacadeMantGrupoUsuario = new FacadeMantGrupoUsuario();
-        mantGrpUsrDataMB.setGruposUsuarios(FacadeMantGrupoUsuario.getAllGruposUsuarios());
+        facadeMantGrupoUsuario = new FacadeMantGrupoUsuario();
+        mantGrpUsrDataMB.setGruposUsuarios(facadeMantGrupoUsuario.getAllGruposUsuarios());
     }
 
     public MantGrpUsrDataMB getMantGrpUsrDataMB() {
@@ -50,11 +50,11 @@ public class MantenimientoGrupoMB implements Serializable {
     }
 
     public IFacadeMantGrupoUsuario getFacadeMantGrupoUsuario() {
-        return FacadeMantGrupoUsuario;
+        return facadeMantGrupoUsuario;
     }
 
-    public void setFacadeMantGrupoUsuario(IFacadeMantGrupoUsuario FacadeMantGrupoUsuario) {
-        this.FacadeMantGrupoUsuario = FacadeMantGrupoUsuario;
+    public void setFacadeMantGrupoUsuario(IFacadeMantGrupoUsuario facadeMantGrupoUsuario) {
+        this.facadeMantGrupoUsuario = facadeMantGrupoUsuario;
     }
 
     public void onRowSelect(SelectEvent event) {
@@ -66,7 +66,7 @@ public class MantenimientoGrupoMB implements Serializable {
             System.out.println("Llegó Aquí");
             mantGrpUsrDataMB.getGrupoUsuario().toString();
             System.out.println("Llegó Acá");
-            FacadeMantGrupoUsuario.guardarGrupoUsuario(mantGrpUsrDataMB.getGrupoUsuario());
+            facadeMantGrupoUsuario.guardarGrupoUsuario(mantGrpUsrDataMB.getGrupoUsuario());
             FacesMessage message = new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
                     "Operación Exitosa",
@@ -83,13 +83,13 @@ public class MantenimientoGrupoMB implements Serializable {
     public void limpiar() {
         mantGrpUsrDataMB.setSeleccion(null);
         mantGrpUsrDataMB.setGrupoUsuario(null);
-        mantGrpUsrDataMB.setGruposUsuarios(FacadeMantGrupoUsuario.getAllGruposUsuarios());
+        mantGrpUsrDataMB.setGruposUsuarios(facadeMantGrupoUsuario.getAllGruposUsuarios());
     }
 
     public void anular() {
         try {
             mantGrpUsrDataMB.getGrupoUsuario().setEstado("Inactivo");
-            FacadeMantGrupoUsuario.guardarGrupoUsuario(mantGrpUsrDataMB.getGrupoUsuario());
+            facadeMantGrupoUsuario.guardarGrupoUsuario(mantGrpUsrDataMB.getGrupoUsuario());
             FacesMessage message = new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
                     "Operación Exitosa",
@@ -105,7 +105,7 @@ public class MantenimientoGrupoMB implements Serializable {
 
     public void eliminar() {
         try {
-            FacadeMantGrupoUsuario.eliminarGrupoUsuario(mantGrpUsrDataMB.getGrupoUsuario().getId());
+            facadeMantGrupoUsuario.eliminarGrupoUsuario(mantGrpUsrDataMB.getGrupoUsuario().getId());
             FacesMessage message = new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
                     "Operación Exitosa",

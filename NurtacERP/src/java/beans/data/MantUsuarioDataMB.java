@@ -9,10 +9,10 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import ModuloGen.modelo.Empresa;
-import ModuloGen.modelo.Sucursal;
-import ModuloSeg.modelo.GrupoUsuario;
-import ModuloSeg.modelo.Usuario;
+import modelo.general.Empresa;
+import modelo.general.Sucursal;
+import modelo.seguridad.GrupoUsuario;
+import modelo.seguridad.Usuario;
 
 /**
  *

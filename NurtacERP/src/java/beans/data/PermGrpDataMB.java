@@ -9,8 +9,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-import ModuloSeg.modelo.GrupoUsuario;
-import ModuloSeg.modelo.Page;
+import modelo.seguridad.GrupoUsuario;
+import modelo.seguridad.Page;
 
 /**
  *
