@@ -5,20 +5,20 @@
  */
 package ModuloGen.capadatos;
 
-import ModuloGen.Dao.EmpresaDAO;
-import ModuloGen.entities.GenEmpresas;
-import ModuloGen.factory.FactoryEM;
-import ModuloGen.Dao.IEmpresaDAO;
-import ModuloGen.Dao.ISucursalDAO;
-import ModuloGen.Dao.SucursalDAO;
-import ModuloSeg.Dao.IMenuDAO;
-import ModuloSeg.Dao.IUsuarioDAO;
-import ModuloSeg.Dao.MenuDAO;
-import ModuloSeg.Dao.UsuarioDAO;
-import ModuloGen.entities.GenSucursales;
-import ModuloSeg.entities.SegMenus;
-import ModuloSeg.entities.SegPermisosgrupos;
-import ModuloSeg.entities.SegUsuarios;
+import general.Dao.EmpresaDAO;
+import general.entities.GenEmpresas;
+import general.factory.FactoryEM;
+import general.Dao.IEmpresaDAO;
+import general.Dao.ISucursalDAO;
+import general.Dao.SucursalDAO;
+import seguridad.Dao.IMenuDAO;
+import seguridad.Dao.IUsuarioDAO;
+import seguridad.Dao.MenuDAO;
+import seguridad.Dao.UsuarioDAO;
+import general.entities.GenSucursales;
+import seguridad.entities.SegMenus;
+import seguridad.entities.SegPermisosgrupos;
+import seguridad.entities.SegUsuarios;
 import java.util.List;
 
 /**

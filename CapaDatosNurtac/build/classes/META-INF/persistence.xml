@@ -3,25 +3,36 @@
   <persistence-unit name="CapaDatosPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>entities.general.GenEmpresas</class>
-    <class>entities.general.GenSucursales</class>
     <class>entities.general.GenGenerales</class>
-    <class>entities.seguridad.SegPermisosgrupos</class>
+    <class>entities.general.GenSucursales</class>
     <class>entities.seguridad.SegBitacora</class>
-    <class>entities.seguridad.SegMenus</class>
     <class>entities.seguridad.SegGruposusuarios</class>
+    <class>entities.seguridad.SegMenus</class>
     <class>entities.seguridad.SegModulos</class>
-    <class>entities.seguridad.SegUsuarios</class>
+    <class>entities.seguridad.SegPermisosgrupos</class>
     <class>entities.seguridad.SegPermisosusuarios</class>
     <class>entities.seguridad.SegTiposmenu</class>
+    <class>entities.seguridad.SegUsuarios</class>
+    <class>general.entities.GenEmpresas</class>
+    <class>general.entities.GenGenerales</class>
+    <class>general.entities.GenSucursales</class>
+    <class>seguridad.entities.SegGruposusuarios</class>
+    <class>seguridad.entities.SegMenus</class>
+    <class>seguridad.entities.SegTiposmenu</class>
+    <class>seguridad.entities.SegUsuarios</class>
+    <class>seguridad.entities.SegPermisosgrupos</class>
+    <class>seguridad.entities.SegPermisosusuarios</class>
+    <class>seguridad.entities.SegBitacora</class>
+    <class>seguridad.entities.SegModulos</class>
     <validation-mode>NONE</validation-mode>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Nurtac"/>
-      <property name="javax.persistence.jdbc.user" value="postgres"/>
-      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="1234"/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/postgres"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="postgres"/>
     </properties>
   </persistence-unit>
 </persistence>
