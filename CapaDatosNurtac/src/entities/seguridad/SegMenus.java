@@ -46,7 +46,7 @@ import javax.persistence.Table;
     , @NamedQuery(name = "SegMenus.findPermisosGrupo", query = "SELECT m FROM SegMenus m "
             + "LEFT JOIN FETCH m.segPermisosgruposList p "
             + "WHERE (p.segGruposusuarios.grupousuarioid = :grupousuarioid OR p is NULL)")
-    , @NamedQuery(name = "SegMenus.getNextId", query = "SELECT coalesce(max(s.menuid), 0) + 1 FROM SegMenus s")})
+    , @NamedQuery(name = "SegMenus.getNextId", query = "SELECT MAX(coalesce(s.menuid, 0)) + 1 FROM SegMenus s")})
 public class SegMenus implements Serializable {
 
     private static final long serialVersionUID = 1L;

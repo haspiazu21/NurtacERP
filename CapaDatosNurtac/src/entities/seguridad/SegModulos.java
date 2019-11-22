@@ -28,7 +28,7 @@ import javax.persistence.Table;
     , @NamedQuery(name = "SegModulos.findByModuloid", query = "SELECT s FROM SegModulos s WHERE s.moduloid = :moduloid")
     , @NamedQuery(name = "SegModulos.findByNombre", query = "SELECT s FROM SegModulos s WHERE s.nombre = :nombre")
     , @NamedQuery(name = "SegModulos.findByEstado", query = "SELECT s FROM SegModulos s WHERE s.estado = :estado")
-    , @NamedQuery(name = "SegModulos.getNextId", query = "SELECT coalesce(s.moduloid, 0) + 1 FROM SegModulos s")})
+    , @NamedQuery(name = "SegModulos.getNextId", query = "SELECT MAX(coalesce(s.moduloid, 0)) + 1 FROM SegModulos s")})
 public class SegModulos implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -33,7 +33,7 @@ import javax.persistence.TemporalType;
     , @NamedQuery(name = "SegBitacora.findByAccion", query = "SELECT s FROM SegBitacora s WHERE s.accion = :accion")
     , @NamedQuery(name = "SegBitacora.findByUsuario", query = "SELECT s FROM SegBitacora s WHERE s.usuario = :usuario")
     , @NamedQuery(name = "SegBitacora.findByGrupousuario", query = "SELECT s FROM SegBitacora s WHERE s.grupousuario = :grupousuario")
-    , @NamedQuery(name = "SegBitacora.getNextId", query = "SELECT coalesce(s.codigo, 0) + 1 FROM SegBitacora s")})
+    , @NamedQuery(name = "SegBitacora.getNextId", query = "SELECT MAX(coalesce(s.codigo, 0)) + 1 FROM SegBitacora s")})
 public class SegBitacora implements Serializable {
 
     private static final long serialVersionUID = 1L;

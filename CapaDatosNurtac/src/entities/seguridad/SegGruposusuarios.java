@@ -28,7 +28,7 @@ import javax.persistence.Table;
     , @NamedQuery(name = "SegGruposusuarios.findByGrupousuarioid", query = "SELECT s FROM SegGruposusuarios s WHERE s.grupousuarioid = :grupousuarioid")
     , @NamedQuery(name = "SegGruposusuarios.findByNombre", query = "SELECT s FROM SegGruposusuarios s WHERE s.nombre = :nombre")
     , @NamedQuery(name = "SegGruposusuarios.findByEstado", query = "SELECT s FROM SegGruposusuarios s WHERE s.estado = :estado")
-    , @NamedQuery(name = "SegGruposusuarios.getNextId", query = "SELECT coalesce(s.grupousuarioid, 0) + 1 FROM SegGruposusuarios s")})
+    , @NamedQuery(name = "SegGruposusuarios.getNextId", query = "SELECT MAX(coalesce(s.grupousuarioid, 0)) + 1 FROM SegGruposusuarios s")})
 public class SegGruposusuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;

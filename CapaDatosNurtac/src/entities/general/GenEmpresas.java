@@ -33,7 +33,7 @@ import javax.persistence.Table;
     , @NamedQuery(name = "GenEmpresas.findByCedreplegal", query = "SELECT g FROM GenEmpresas g WHERE g.cedreplegal = :cedreplegal")
     , @NamedQuery(name = "GenEmpresas.findByReplegal", query = "SELECT g FROM GenEmpresas g WHERE g.replegal = :replegal")
     , @NamedQuery(name = "GenEmpresas.findByEstado", query = "SELECT g FROM GenEmpresas g WHERE g.estado = :estado")
-    , @NamedQuery(name = "GenEmpresas.getNextId", query = "SELECT coalesce(g.empresaid, 0) + 1 FROM GenEmpresas g")})
+    , @NamedQuery(name = "GenEmpresas.getNextId", query = "SELECT MAX(coalesce(g.empresaid, 0)) + 1 FROM GenEmpresas g")})
 public class GenEmpresas implements Serializable {
 
     private static final long serialVersionUID = 1L;

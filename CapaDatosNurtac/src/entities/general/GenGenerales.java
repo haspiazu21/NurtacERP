@@ -26,7 +26,7 @@ import javax.persistence.Table;
     , @NamedQuery(name = "GenGenerales.findBySiglatipo", query = "SELECT g FROM GenGenerales g WHERE g.siglatipo = :siglatipo")
     , @NamedQuery(name = "GenGenerales.findByNombre", query = "SELECT g FROM GenGenerales g WHERE g.nombre = :nombre")
     , @NamedQuery(name = "GenGenerales.findByEstado", query = "SELECT g FROM GenGenerales g WHERE g.estado = :estado")
-    , @NamedQuery(name = "GenGenerales.getNextId", query = "SELECT coalesce(g.generalid, 0) + 1 FROM GenGenerales g")})
+    , @NamedQuery(name = "GenGenerales.getNextId", query = "SELECT MAX(coalesce(g.generalid, 0)) + 1 FROM GenGenerales g")})
 public class GenGenerales implements Serializable {
 
     private static final long serialVersionUID = 1L;

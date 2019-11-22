@@ -38,7 +38,7 @@ import listeners.seguridad.SegUsuariosListener;
     , @NamedQuery(name = "SegUsuarios.findByNombre", query = "SELECT s FROM SegUsuarios s WHERE s.nombre = :nombre")
     , @NamedQuery(name = "SegUsuarios.findByEstado", query = "SELECT s FROM SegUsuarios s WHERE s.estado = :estado")
     , @NamedQuery(name = "SegUsuarios.findByUsernamePassword", query = "SELECT s FROM SegUsuarios s WHERE s.username = :username AND s.contrasena = :password")
-    , @NamedQuery(name = "SegUsuarios.getNextId", query = "SELECT coalesce(max(s.usuarioid), 0) + 1 FROM SegUsuarios s")})
+    , @NamedQuery(name = "SegUsuarios.getNextId", query = "SELECT max(coalesce(s.usuarioid, 0)) + 1 FROM SegUsuarios s")})
 public class SegUsuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -36,7 +36,7 @@ import javax.persistence.Table;
     , @NamedQuery(name = "GenSucursales.findByEmail", query = "SELECT g FROM GenSucursales g WHERE g.email = :email")
     , @NamedQuery(name = "GenSucursales.findByEstado", query = "SELECT g FROM GenSucursales g WHERE g.estado = :estado")
     , @NamedQuery(name = "GenSucursales.findByEmpresaid", query = "SELECT g FROM GenSucursales g WHERE g.empresaid.empresaid = :empresaid")
-    , @NamedQuery(name = "GenSucursales.getNextId", query = "SELECT coalesce(g.sucursalid, 0) + 1 FROM GenSucursales g")})
+    , @NamedQuery(name = "GenSucursales.getNextId", query = "SELECT MAX(coalesce(g.sucursalid, 0)) + 1 FROM GenSucursales g")})
 public class GenSucursales implements Serializable {
 
     private static final long serialVersionUID = 1L;
