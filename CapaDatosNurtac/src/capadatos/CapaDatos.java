@@ -7,18 +7,25 @@ package capadatos;
 
 import dao.general.EmpresaDAO;
 import entities.general.GenEmpresas;
+import entities.seguridad.SegRoles;
 import factory.FactoryEM;
 import dao.general.IEmpresaDAO;
 import dao.general.ISucursalDAO;
 import dao.general.SucursalDAO;
 import dao.seguridad.IMenuDAO;
+import dao.seguridad.IModuloDAO;
+import dao.seguridad.IRolesDAO;
 import dao.seguridad.IUsuarioDAO;
 import dao.seguridad.MenuDAO;
+import dao.seguridad.RolesDAO;
 import dao.seguridad.UsuarioDAO;
+import dao.seguridad.ModuloDAO;
 import entities.general.GenSucursales;
 import entities.seguridad.SegMenus;
+import entities.seguridad.SegModulos;
 import entities.seguridad.SegPermisosgrupos;
 import entities.seguridad.SegUsuarios;
+import static java.lang.Boolean.TRUE;
 import java.util.List;
 
 /**
@@ -32,7 +39,7 @@ public class CapaDatos {
      */
     public static void main(String[] args) {
 
-//        FactoryEM.inicializarFactory();
+        FactoryEM.inicializarFactory();
 //        IEmpresaDAO crud = new EmpresaDAO();
 /**Creacion de Empresa*/
 //        GenEmpresas empresa = new GenEmpresas();
@@ -45,7 +52,7 @@ public class CapaDatos {
 //        crud.create(empresa);
 //        System.out.println(empresa.toString());
         
-/**Actuualizacion de Datos empresariales*/
+/**Actualizacion de Datos empresariales*/
 //        GenEmpresas empresa2 = crud.find(2);
 //        System.out.println(empresa2.toString());
 //        empresa2.setNombre("Nurtac");
@@ -61,8 +68,46 @@ public class CapaDatos {
 //            System.out.println(menu.getNombre());
 //            System.out.println(menu.getSegPermisosgruposList().size());
 //        }
-        
-//      FactoryEM.destruirFactory();
-    }
+  
+/**Gestion de Roles - Nueva Implementacion Henry Aspiazu 28/10/2019 */
 
+//        SegRoles roles= new SegRoles();
+//       
+//        IRolesDAO crud_rol = new RolesDAO();
+//        //roles.setIdRol(2);
+//        roles.setNombreRol("Administración de Usuarios");
+//        roles.setModulo("Seguridad");
+//        roles.setSubmodulo("Consultas");
+//        roles.setEstadoRol("Activo");
+//               
+//        crud_rol.create(roles);
+//        System.out.println(roles.toString());
+/**Gestion de Usuarios - Nueva Implementacion Henry Aspiazu 28/10/2019 */
+    SegUsuarios usuario= new SegUsuarios();
+    IEmpresaDAO crud = new EmpresaDAO();
+    GenEmpresas empresa = crud.find(2);
+    empresa.getGenSucursalesList().get(1);
+    
+    GenSucursales sucursal= new GenSucursales();
+    
+    sucursal.getSucursalid();
+   
+    UsuarioDAO crud_user =new UsuarioDAO();
+    
+    usuario.setUsername("User Pruebas");
+    usuario.setContrasena("12345");
+    usuario.getEmpresaid();
+    usuario.setEstado("A");
+    //usuario.setGrupousuarioid(2);
+    //usuario.setSegPermisosusuariosList(true,true,true);
+    //usuario.setSucursalid()=sucursal.setSucursalid(1);
+    usuario.setUsuarioid_rol(1);
+
+    crud_user.create(usuario);
+    System.out.println(usuario.toString());
+
+
+/**Gestion de bitacora - Nueva Implementacion Henry Aspiazu 28/10/2019 */
+      FactoryEM.destruirFactory();
+    }
 }

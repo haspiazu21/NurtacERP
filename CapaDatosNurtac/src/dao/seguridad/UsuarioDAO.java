@@ -162,4 +162,27 @@ public class UsuarioDAO implements IUsuarioDAO {
         return usuario;
     }
 
+    public SegUsuarios findByUsernameRol(String username, Integer usuarioid_rol) {
+        EntityManager em = null;
+        SegUsuarios usuario = null;
+        try {
+            em = FactoryEM.getEntityManager();
+            em.getTransaction().begin();
+            TypedQuery q = em.createNamedQuery("SegUsuarios.findByUsernameRol", SegUsuarios.class);
+            q.setParameter("username", username);
+            q.setParameter("usuarioid_rol", usuarioid_rol);
+            if (q.getResultList().size() == 1) {
+                usuario = (SegUsuarios) q.getSingleResult();
+            }
+            em.getTransaction().commit();
+        } catch (Exception exc) {
+            throw exc;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return usuario;
+    }
+
 }

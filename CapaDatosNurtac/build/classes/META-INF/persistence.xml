@@ -13,6 +13,7 @@
     <class>entities.seguridad.SegPermisosusuarios</class>
     <class>entities.seguridad.SegTiposmenu</class>
     <class>entities.seguridad.SegUsuarios</class>
+    <class>entities.seguridad.SegRoles</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Nurtac"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

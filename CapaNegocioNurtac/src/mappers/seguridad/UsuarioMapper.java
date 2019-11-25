@@ -19,26 +19,26 @@ import modelo.seguridad.Usuario;
  * @author Ellet
  */
 public class UsuarioMapper implements IUsuarioMapper {
-    
+
     @Override
     public Usuario entityToModel(SegUsuarios usuarioEntity) {
         if (usuarioEntity == null) {
             return null;
         }
-        
+
         GrupoUsuario grupoUsuario = null;
-        
+
         if (usuarioEntity.getGrupousuarioid() != null) {
             grupoUsuario = new GrupoUsuario();
             grupoUsuario.setDescripcion(usuarioEntity.getGrupousuarioid().getDescripcion());
             grupoUsuario.setEstado(usuarioEntity.getGrupousuarioid().getEstado().equals("A") ? "Activo" : "Inactivo");
             grupoUsuario.setId(usuarioEntity.getGrupousuarioid().getGrupousuarioid());
             grupoUsuario.setNombre(usuarioEntity.getGrupousuarioid().getNombre());
-            
+
         }
-        
+
         Empresa empresa = null;
-        
+
         if (usuarioEntity.getEmpresaid() != null) {
             empresa = new Empresa();
             empresa.setCedRepLegal(usuarioEntity.getEmpresaid().getCedreplegal());
@@ -47,11 +47,11 @@ public class UsuarioMapper implements IUsuarioMapper {
             empresa.setId(usuarioEntity.getEmpresaid().getEmpresaid());
             empresa.setNombre(usuarioEntity.getEmpresaid().getNombre());
             empresa.setRepLegal(usuarioEntity.getEmpresaid().getReplegal());
-            
+
         }
-        
+
         Sucursal sucursal = null;
-        
+
         if (usuarioEntity.getSucursalid() != null) {
             sucursal = new Sucursal();
             sucursal.setDireccion(usuarioEntity.getSucursalid().getDireccion());
@@ -61,9 +61,9 @@ public class UsuarioMapper implements IUsuarioMapper {
             sucursal.setId(usuarioEntity.getSucursalid().getSucursalid());
             sucursal.setNombre(usuarioEntity.getSucursalid().getNombre());
             sucursal.setTelefono(usuarioEntity.getSucursalid().getTelefono());
-            
+
         }
-        
+
         Usuario usuario = new Usuario();
         usuario.setContrasena(usuarioEntity.getContrasena());
         usuario.setEmpresa(empresa);
@@ -73,28 +73,27 @@ public class UsuarioMapper implements IUsuarioMapper {
         usuario.setNombre(usuarioEntity.getNombre());
         usuario.setSucursal(sucursal);
         usuario.setUsuario(usuarioEntity.getUsername());
-        
+
         return usuario;
-        
+
     }
-    
+
     @Override
     public SegUsuarios modelToEntity(Usuario usuario) {
-        
+
         GenEmpresas genEmpresas = new GenEmpresas();
         genEmpresas.setEmpresaid(usuario.getEmpresa().getId());
-        
+
         GenSucursales genSucursales = new GenSucursales();
         genSucursales.setSucursalid(usuario.getSucursal().getId());
-        
-        
+
         SegGruposusuarios segGruposusuarios = null;
-        
-        if(usuario.getGrupousuario() != null){
+
+        if (usuario.getGrupousuario() != null) {
             segGruposusuarios = new SegGruposusuarios();
             segGruposusuarios.setGrupousuarioid(usuario.getGrupousuario().getId());
         }
-        
+
         SegUsuarios segUsuarios = new SegUsuarios();
         segUsuarios.setUsuarioid(usuario.getId());
         segUsuarios.setContrasena(usuario.getContrasena());
@@ -104,9 +103,9 @@ public class UsuarioMapper implements IUsuarioMapper {
         segUsuarios.setNombre(usuario.getNombre());
         segUsuarios.setSucursalid(genSucursales);
         segUsuarios.setUsername(usuario.getUsuario());
-        
+
         return segUsuarios;
-        
+
     }
-    
+
 }
