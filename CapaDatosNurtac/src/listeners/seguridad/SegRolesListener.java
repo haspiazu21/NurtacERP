@@ -6,7 +6,6 @@
 package listeners.seguridad;
 
 import entities.seguridad.SegRoles;
-import entities.seguridad.SegUsuarios;
 import exceptions.UniqueException;
 import factory.FactoryEM;
 import javax.persistence.EntityManager;
@@ -18,8 +17,8 @@ import javax.persistence.TypedQuery;
  * @author haspi
  */
 public class SegRolesListener {
-    
-      @PrePersist
+
+    @PrePersist
     public void rolExiste(SegRoles segRoles) throws UniqueException {
         EntityManager em = null;
         try {
@@ -27,8 +26,10 @@ public class SegRolesListener {
             em.getTransaction().begin();
             TypedQuery q = em.createNamedQuery("SegRoles.findByNombreRol", SegRoles.class);
             q.setParameter("nombreRol", segRoles.getNombreRol());
+            q.setParameter("modulo",segRoles.getModulo());
+            q.setParameter("submodulo", segRoles.getSubmodulo());
             if (q.getResultList().size() > 0) {
-                throw new UniqueException("Nombre de rol ya existe");
+                throw new UniqueException("El rol, modulo y submodulo ya estan registrados");
             }
             em.getTransaction().commit();
 

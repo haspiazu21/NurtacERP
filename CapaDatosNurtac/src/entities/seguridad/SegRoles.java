@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "SegRoles.findAll", query = "SELECT s FROM SegRoles s"),
     @NamedQuery(name = "SegRoles.findByIdRol", query = "SELECT s FROM SegRoles s WHERE s.idRol = :idRol"),
-    @NamedQuery(name = "SegRoles.findByNombreRol", query = "SELECT s FROM SegRoles s WHERE s.nombreRol = :nombreRol"),
+    @NamedQuery(name = "SegRoles.findByNombreRol", query = "SELECT s FROM SegRoles s WHERE s.nombreRol = :nombreRol and s.modulo = :modulo and s.submodulo = :submodulo"),
     @NamedQuery(name = "SegRoles.findByModulo", query = "SELECT s FROM SegRoles s WHERE s.modulo = :modulo"),
     @NamedQuery(name = "SegRoles.findBySubmodulo", query = "SELECT s FROM SegRoles s WHERE s.submodulo = :submodulo"),
     @NamedQuery(name = "SegRoles.findByEstadoRol", query = "SELECT s FROM SegRoles s WHERE s.estadoRol = :estadoRol"),
@@ -115,7 +115,7 @@ public class SegRoles implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.seguridad.SegRoles[ idRol= " + idRol + " ]";
+        return "entities.seguridad.SegRoles[ idRol= " + idRol + " nombre rol " + nombreRol  +"]";
     }
 
     

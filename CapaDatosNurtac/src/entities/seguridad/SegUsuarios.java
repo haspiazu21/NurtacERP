@@ -31,14 +31,15 @@ import listeners.seguridad.SegUsuariosListener;
 @EntityListeners({SegUsuariosListener.class})
 @Table(name = "seg_usuarios")
 @NamedQueries({
-    @NamedQuery(name = "SegUsuarios.findAll", query = "SELECT s FROM SegUsuarios s")
-    , @NamedQuery(name = "SegUsuarios.findByUsuarioid", query = "SELECT s FROM SegUsuarios s WHERE s.usuarioid = :usuarioid")
-    , @NamedQuery(name = "SegUsuarios.findByUsername", query = "SELECT s FROM SegUsuarios s WHERE s.username = :username")
-    , @NamedQuery(name = "SegUsuarios.findByContrasena", query = "SELECT s FROM SegUsuarios s WHERE s.contrasena = :contrasena")
-    , @NamedQuery(name = "SegUsuarios.findByNombre", query = "SELECT s FROM SegUsuarios s WHERE s.nombre = :nombre")
-    , @NamedQuery(name = "SegUsuarios.findByEstado", query = "SELECT s FROM SegUsuarios s WHERE s.estado = :estado")
-    , @NamedQuery(name = "SegUsuarios.findByUsernamePassword", query = "SELECT s FROM SegUsuarios s WHERE s.username = :username AND s.contrasena = :password")
-    , @NamedQuery(name = "SegUsuarios.getNextId", query = "SELECT max(coalesce(s.usuarioid, 0)) + 1 FROM SegUsuarios s")})
+    @NamedQuery(name = "SegUsuarios.findAll", query = "SELECT s FROM SegUsuarios s"),
+    @NamedQuery(name = "SegUsuarios.findByUsuarioid", query = "SELECT s FROM SegUsuarios s WHERE s.usuarioid = :usuarioid"),
+    @NamedQuery(name = "SegUsuarios.findByUsername", query = "SELECT s FROM SegUsuarios s WHERE s.username = :username"),
+    @NamedQuery(name = "SegUsuarios.findByContrasena", query = "SELECT s FROM SegUsuarios s WHERE s.contrasena = :contrasena"),
+    @NamedQuery(name = "SegUsuarios.findByNombre", query = "SELECT s FROM SegUsuarios s WHERE s.nombre = :nombre"),
+    @NamedQuery(name = "SegUsuarios.findByEstado", query = "SELECT s FROM SegUsuarios s WHERE s.estado = :estado"),
+    @NamedQuery(name = "SegUsuarios.findByUsernamePassword", query = "SELECT s FROM SegUsuarios s WHERE s.username = :username AND s.contrasena = :password"),
+    @NamedQuery(name = "SegUsuarios.findByUsernameRol", query = "SELECT s FROM SegUsuarios s WHERE s.username = :username AND s.usuarioid_rol = :usuarioid_rol"),
+    @NamedQuery(name = "SegUsuarios.getNextId", query = "SELECT max(coalesce(s.usuarioid, 0)) + 1 FROM SegUsuarios s")})
 public class SegUsuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,6 +70,16 @@ public class SegUsuarios implements Serializable {
     @JoinColumn(name = "grupousuarioid", referencedColumnName = "grupousuarioid")
     @ManyToOne
     private SegGruposusuarios grupousuarioid;
+    @Column(name = "usuarioid_rol", nullable = false)
+    private Integer usuarioid_rol;
+
+    public Integer getUsuarioid_rol() {
+        return usuarioid_rol;
+    }
+
+    public void setUsuarioid_rol(Integer usuarioid_rol) {
+        this.usuarioid_rol = usuarioid_rol;
+    }
 
     public SegUsuarios() {
     }
@@ -77,12 +88,13 @@ public class SegUsuarios implements Serializable {
         this.usuarioid = usuarioid;
     }
 
-    public SegUsuarios(Integer usuarioid, String username, String contrasena, String nombre, String estado) {
+    public SegUsuarios(Integer usuarioid, String username, String contrasena, String nombre, String estado, Integer rol_usuario) {
         this.usuarioid = usuarioid;
         this.username = username;
         this.contrasena = contrasena;
         this.nombre = nombre;
         this.estado = estado;
+        this.usuarioid_rol = rol_usuario;
     }
 
     public Integer getUsuarioid() {
@@ -157,6 +169,7 @@ public class SegUsuarios implements Serializable {
         this.grupousuarioid = grupousuarioid;
     }
 
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -179,7 +192,7 @@ public class SegUsuarios implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.general.SegUsuarios[ usuarioid=" + usuarioid + " ]";
+        return "entities.general.SegUsuarios[ usuarioid=" + usuarioid + " usuario=" + nombre + " ]";
     }
 
 }
