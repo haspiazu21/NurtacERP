@@ -11,6 +11,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import modelo.seguridad.Page;
+import modelo.seguridad.Roles;
 import modelo.seguridad.Usuario;
 
 /**
@@ -24,6 +25,15 @@ public class PermUsrDataMB implements Serializable {
     private List<Usuario> usuarios;
     private Usuario seleccion;
     private List<Page> paginas;
+    private List<Roles> lroles;
+
+    public List<Roles> getLroles() {
+        return lroles;
+    }
+
+    public void setLroles(List<Roles> lroles) {
+        this.lroles = lroles;
+    }
 
     public PermUsrDataMB() {
     }

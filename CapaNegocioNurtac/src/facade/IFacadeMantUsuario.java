@@ -9,6 +9,7 @@ import java.util.List;
 import modelo.general.Empresa;
 import modelo.general.Sucursal;
 import modelo.seguridad.GrupoUsuario;
+import modelo.seguridad.Roles;
 import modelo.seguridad.Usuario;
 
 /**
@@ -24,6 +25,8 @@ public interface IFacadeMantUsuario {
     List<GrupoUsuario> findAllGruposUsuarios();
 
     List<Usuario> findAllUsuarios();
+    
+    List<Roles> findAllRoles();
 
     void guardarUsuario(Usuario usuario);
 

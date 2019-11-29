@@ -39,7 +39,7 @@ import listeners.seguridad.SegUsuariosListener;
     @NamedQuery(name = "SegUsuarios.findByEstado", query = "SELECT s FROM SegUsuarios s WHERE s.estado = :estado"),
     @NamedQuery(name = "SegUsuarios.findByUsernamePassword", query = "SELECT s FROM SegUsuarios s WHERE s.username = :username AND s.contrasena = :password"),
     @NamedQuery(name = "SegUsuarios.findByUsernameRol", query = "SELECT s FROM SegUsuarios s WHERE s.username = :username AND s.usuarioid_rol = :usuarioid_rol"),
-    @NamedQuery(name = "SegUsuarios.getNextId", query = "SELECT max(coalesce(s.usuarioid, 0)) + 1 FROM SegUsuarios s")})
+    @NamedQuery(name = "SegUsuarios.getNextId", query = "SELECT MAX(coalesce(s.usuarioid, 0)) + 1 FROM SegUsuarios s")})
 public class SegUsuarios implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,7 +70,7 @@ public class SegUsuarios implements Serializable {
     @JoinColumn(name = "grupousuarioid", referencedColumnName = "grupousuarioid")
     @ManyToOne
     private SegGruposusuarios grupousuarioid;
-    @Column(name = "usuarioid_rol", nullable = false)
+    @Column(name = "usuarioid_rol", nullable = true)
     private Integer usuarioid_rol;
 
     public Integer getUsuarioid_rol() {

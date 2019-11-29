@@ -27,6 +27,7 @@ import entities.seguridad.SegPermisosgrupos;
 import entities.seguridad.SegUsuarios;
 import static java.lang.Boolean.TRUE;
 import java.util.List;
+import listeners.seguridad.SegRolesListener;
 
 /**
  *
@@ -39,8 +40,8 @@ public class CapaDatos {
      */
     public static void main(String[] args) {
 
-        FactoryEM.inicializarFactory();
-//        IEmpresaDAO crud = new EmpresaDAO();
+//        FactoryEM.inicializarFactory();
+//        IEmpresaDAO crud2 = new EmpresaDAO();
 /**Creacion de Empresa*/
 //        GenEmpresas empresa = new GenEmpresas();
 //        empresa.setCedreplegal("0921078580");
@@ -83,31 +84,21 @@ public class CapaDatos {
 //        crud_rol.create(roles);
 //        System.out.println(roles.toString());
 /**Gestion de Usuarios - Nueva Implementacion Henry Aspiazu 28/10/2019 */
-    SegUsuarios usuario= new SegUsuarios();
-    IEmpresaDAO crud = new EmpresaDAO();
-    GenEmpresas empresa = crud.find(2);
-    empresa.getGenSucursalesList().get(1);
-    
-    GenSucursales sucursal= new GenSucursales();
-    
-    sucursal.getSucursalid();
-   
-    UsuarioDAO crud_user =new UsuarioDAO();
-    
-    usuario.setUsername("User Pruebas");
-    usuario.setContrasena("12345");
-    usuario.getEmpresaid();
-    usuario.setEstado("A");
-    //usuario.setGrupousuarioid(2);
-    //usuario.setSegPermisosusuariosList(true,true,true);
-    //usuario.setSucursalid()=sucursal.setSucursalid(1);
-    usuario.setUsuarioid_rol(1);
-
-    crud_user.create(usuario);
-    System.out.println(usuario.toString());
-
+//        IUsuarioDAO crud = new UsuarioDAO();
+//        SegUsuarios usuario = new SegUsuarios();
+//        
+//        usuario.setUsername("User Pruebas");
+//        usuario.setContrasena("12345");
+//        usuario.getEmpresaid();
+//        usuario.setEstado("A");
+//        usuario.setGrupousuarioid(2);
+//        usuario.setSegPermisosusuariosList(true,true,true);
+//        usuario.setSucursalid()=sucursal.setSucursalid(1);
+//        usuario.setUsuarioid_rol(1);
+//        crud.create(usuario);
+//        System.out.println(usuario.toString());
 
 /**Gestion de bitacora - Nueva Implementacion Henry Aspiazu 28/10/2019 */
-      FactoryEM.destruirFactory();
+//      FactoryEM.destruirFactory();
     }
 }

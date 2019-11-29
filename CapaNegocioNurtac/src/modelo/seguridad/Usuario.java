@@ -24,11 +24,12 @@ public class Usuario implements Serializable{
     private String contrasena;
     private String estado;
     private Empresa empresa;
+    private Roles rol_usuario;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nombre, GrupoUsuario grupousuario, Sucursal sucursal, String Usuario, String contrasena, String estado, Empresa empresa) {
+    public Usuario(int id, String nombre, GrupoUsuario grupousuario, Sucursal sucursal, String Usuario, String contrasena, String estado, Empresa empresa, Roles rol_user) {
         this.id = id;
         this.nombre = nombre;
         this.grupousuario = grupousuario;
@@ -37,9 +38,10 @@ public class Usuario implements Serializable{
         this.contrasena = contrasena;
         this.estado = estado;
         this.empresa = empresa;
+        this.rol_usuario= rol_user;
     }
 
-    public Usuario(String nombre, GrupoUsuario grupousuario, Sucursal sucursal, String Usuario, String contrasena, String estado, Empresa empresa) {
+    public Usuario(String nombre, GrupoUsuario grupousuario, Sucursal sucursal, String Usuario, String contrasena, String estado, Empresa empresa, Roles rol_user) {
         this.nombre = nombre;
         this.grupousuario = grupousuario;
         this.sucursal = sucursal;
@@ -47,6 +49,15 @@ public class Usuario implements Serializable{
         this.contrasena = contrasena;
         this.estado = estado;
         this.empresa = empresa;
+        this.rol_usuario= rol_user;
+    }
+
+    public Roles getRol_usuario() {
+        return rol_usuario;
+    }
+
+    public void setRol_usuario(Roles rol_usuario) {
+        this.rol_usuario = rol_usuario;
     }
 
     public int getId() {
@@ -142,7 +153,7 @@ public class Usuario implements Serializable{
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", grupousuario=" + grupousuario + ", sucursal=" + sucursal + ", Usuario=" + Usuario + ", contrasena=" + contrasena + ", estado=" + estado + ", empresa=" + empresa + '}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", grupousuario=" + grupousuario + ", sucursal=" + sucursal + ", Usuario=" + Usuario + ", contrasena=" + contrasena + ", estado=" + estado + ", empresa=" + empresa + ", rolusuario=" + rol_usuario + '}';
     }
 
    

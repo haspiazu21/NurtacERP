@@ -73,7 +73,8 @@ public class UsuarioMapper implements IUsuarioMapper {
         usuario.setNombre(usuarioEntity.getNombre());
         usuario.setSucursal(sucursal);
         usuario.setUsuario(usuarioEntity.getUsername());
-
+        usuario.setRol_usuario(usuario.getRol_usuario());
+   
         return usuario;
 
     }

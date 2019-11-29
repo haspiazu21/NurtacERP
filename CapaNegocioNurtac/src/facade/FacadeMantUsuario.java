@@ -11,11 +11,14 @@ import dao.general.ISucursalDAO;
 import dao.general.SucursalDAO;
 import dao.seguridad.GrupoUsuarioDAO;
 import dao.seguridad.IGrupoUsuarioDAO;
+import dao.seguridad.IRolesDAO;
 import dao.seguridad.IUsuarioDAO;
+import dao.seguridad.RolesDAO;
 import dao.seguridad.UsuarioDAO;
 import entities.general.GenEmpresas;
 import entities.general.GenSucursales;
 import entities.seguridad.SegGruposusuarios;
+import entities.seguridad.SegRoles;
 import entities.seguridad.SegUsuarios;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,11 +29,14 @@ import mappers.general.ISucursalMapper;
 import mappers.general.SucursalMapper;
 import mappers.seguridad.GrupoUsuarioMapper;
 import mappers.seguridad.IGrupoUsuarioMapper;
+import mappers.seguridad.IRolMapper;
 import mappers.seguridad.IUsuarioMapper;
+import mappers.seguridad.RolMapper;
 import mappers.seguridad.UsuarioMapper;
 import modelo.general.Empresa;
 import modelo.general.Sucursal;
 import modelo.seguridad.GrupoUsuario;
+import modelo.seguridad.Roles;
 import modelo.seguridad.Usuario;
 
 /**
@@ -46,6 +52,7 @@ public class FacadeMantUsuario implements IFacadeMantUsuario, Serializable {
     private final ISucursalDAO sucursalDAO;
     private final IGrupoUsuarioDAO grupoUsuarioDAO;
     private final IUsuarioDAO usuarioDAO;
+    private final IRolesDAO rolesDAO;
     /*
     DTO Mappers
      */
@@ -53,17 +60,20 @@ public class FacadeMantUsuario implements IFacadeMantUsuario, Serializable {
     private final ISucursalMapper sucursalMapper;
     private final IGrupoUsuarioMapper grupoUsuarioMapper;
     private final IUsuarioMapper usuarioMapper;
+    private final IRolMapper rolesMapper;
 
     public FacadeMantUsuario() {
         empresaDAO = new EmpresaDAO();
         sucursalDAO = new SucursalDAO();
         grupoUsuarioDAO = new GrupoUsuarioDAO();
         usuarioDAO = new UsuarioDAO();
+        rolesDAO = new RolesDAO();
 
         empresaMapper = new EmpresaMapper();
         sucursalMapper = new SucursalMapper();
         grupoUsuarioMapper = new GrupoUsuarioMapper();
         usuarioMapper = new UsuarioMapper();
+        rolesMapper = new RolMapper();
 
     }
 
@@ -76,6 +86,17 @@ public class FacadeMantUsuario implements IFacadeMantUsuario, Serializable {
             empresas.add(empresa);
         }
         return empresas;
+    }
+
+    @Override
+    public List<Roles> findAllRoles() {
+        List<Roles> roles = new ArrayList<>();
+        List<SegRoles> entities = rolesDAO.findAll();
+        for (SegRoles entity : entities) {
+            Roles rol = rolesMapper.entityToModel(entity);
+            roles.add(rol);
+        }
+        return roles;
     }
 
     @Override
@@ -114,6 +135,8 @@ public class FacadeMantUsuario implements IFacadeMantUsuario, Serializable {
     @Override
     public void guardarUsuario(Usuario usuario) {
         usuario.setEstado(usuario.getEstado() == null ? "Activo" : usuario.getEstado());
+        usuario.setRol_usuario(usuario.getRol_usuario()== null ? null : usuario.getRol_usuario());
+        
         SegUsuarios segUsuarios = usuarioMapper.modelToEntity(usuario);
         if (usuario.getId() == 0) {
             usuarioDAO.create(segUsuarios);
