@@ -14,16 +14,17 @@ and open the template in the editor.
     </h:head>
     <h:body>
 
+      <h:form id="frmMantenimientoRol">   
         <h:panelGrid columns="4">
-            <p:commandButton id="btnNuevo" value="Nuevo" icon="fa fa-plus-circle" iconPos="right"/>
+            <p:commandButton id="btnNuevo" value="Nuevo" actionListener="#{MantenimientoRolesMB.limpiar()}" update=":frmContent:frmMantenimientoRol" process=":frmContent:frmMantenimientoRol" icon="fa fa-plus-circle" iconPos="right"/>
             <p:commandButton id="btnAnular" value="Anular" icon="fa fa-times-circle-o" iconPos="right"/>
             <p:commandButton id="btnEliminar" value="Eliminar" icon="fa fa-trash" iconPos="right"/>
             <p:commandButton id="btnSalir" value="Salir"  icon="fa fa-reply" iconPos="right"/>
         </h:panelGrid>
-        <h:form>
+            
             <p:fieldset  legend="Roles del Sistema" style="margin-top: 30px">      
                 <h:panelGrid columns="2" cellpadding="5">
-                    <p:dataTable id="sorting" var="car" value="#{mantenimientoRolesMB.listrol}" sortBy="#{car.codigo}" selectionMode="single" selection="#{mantenimientoRolesMB.listrol}" rowKey="#{car.codigo}">
+                    <p:dataTable id="sorting" var="car" value="#{MantenimientoRolesMB.mantRolDataMB.rol}" sortBy="#{car.codigo}" selectionMode="single" selection="#{mantenimientoRolesMB.mantRolDataMB.rol}" rowKey="#{car.codigo}">
                      <p:ajax event="rowSelect" listener="#{mantenimientoRolesMB.onRowSelect}" update=":frmContent:pnlContent"/>
                         <p:column headerText="Codigo">
                             <h:outputText value="#{car.codigo}" />
@@ -56,7 +57,7 @@ and open the template in the editor.
                     <p:inputText value="Mantenimiento de Roles" size="30" maxlength="20"/>
 
                     <p:outputLabel  value = "Modulo" />
-                    <p:selectOneMenu value = "#{MantenimientoRolesMB.listrol}" style="width: 88%" autoWidth="true">
+                    <p:selectOneMenu value = "#{MantenimientoRolesMB.mantRolDataMB.lroles}" style="width: 88%" autoWidth="true">
                         <f:selectItem itemLabel="Inventario" />
                     </p:selectOneMenu>
 
@@ -75,8 +76,6 @@ and open the template in the editor.
                 </h:panelGrid>
             </p:fieldset>
         </h:form>         
-
-
     </h:body>
 </html>
 
