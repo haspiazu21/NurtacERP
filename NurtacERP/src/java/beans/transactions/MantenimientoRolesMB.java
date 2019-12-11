@@ -71,7 +71,7 @@ public class MantenimientoRolesMB implements Serializable {
     }
 
     public void salir() {
-
+ 
     }
 
 }
