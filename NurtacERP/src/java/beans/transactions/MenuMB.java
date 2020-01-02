@@ -117,10 +117,10 @@ public class MenuMB implements Serializable {
 
         loggedUser = facadeSeguridad.getLoggedUser(username, password);
         if (loggedUser != null) {
-//            FacesContext.getCurrentInstance()
-//                    .getExternalContext()
-//                    .getSessionMap()
-//                    .put("loggedUser", loggedUser);
+            FacesContext.getCurrentInstance()
+                    .getExternalContext()
+                    .getSessionMap()
+                    .put("loggedUser", loggedUser);
             constructMenu();
             return "home?faces-redirect=true";
         } else {

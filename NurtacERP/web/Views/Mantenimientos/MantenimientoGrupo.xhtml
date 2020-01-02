@@ -56,7 +56,7 @@ and open the template in the editor.
                     <p:inputTextarea id="txtDescripcion" value="#{mantenimientoGrupoMB.mantGrpUsrDataMB.grupoUsuario.descripcion}" rows="5" cols="30" maxlength="30"/>
 
                     <p:commandButton id="btnGuardar" value="Guardar" validateClient="true" actionListener="#{mantenimientoGrupoMB.grabar}" update=":frmContent:frmMantenimiento" process=":frmContent:frmMantenimiento" icon="fa fa-save" iconPos="right">
-                        <p:confirm header="Confirmation de Acción" message="¿Desea guardar el grupo de usuario?" icon="fa fa-exclamation-triangle" />
+                        <p:confirm header="Confirma Acción" message="¿Desea guardar el grupo de usuario?" icon="fa fa-exclamation-triangle" />
                     </p:commandButton>
                     <p:commandButton id="btnCancelar" value="Cancelar" icon="fa fa-remove" iconPos="right"/>
 

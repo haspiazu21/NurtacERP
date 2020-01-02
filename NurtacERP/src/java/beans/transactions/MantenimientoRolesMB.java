@@ -6,20 +6,21 @@
 package beans.transactions;
 
 import beans.data.MantRolDataMB;
-import facade.FacadeMantUsuario;
 import facade.FacadeRol;
 import facade.IFacadeRol;
 import modelo.seguridad.Roles;
+import modelo.seguridad.Page;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import modelo.general.Empresa;
-import modelo.seguridad.Usuario;
+import modelo.seguridad.Roles;
+import org.primefaces.PrimeFaces;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -27,7 +28,8 @@ import org.primefaces.event.SelectEvent;
  * @author Henry
  */
 @Named
-@ViewScoped
+@ManagedBean
+@javax.faces.bean.RequestScoped
 public class MantenimientoRolesMB implements Serializable {
 
     @Inject
@@ -36,9 +38,15 @@ public class MantenimientoRolesMB implements Serializable {
 
     @PostConstruct
     public void init() {
-        mantRolDataMB.setRol(new Roles());
+
+        mantRolDataMB.setSel_roles(new Roles());
         facadeMantRol = new FacadeRol();
         mantRolDataMB.setLroles(facadeMantRol.getAllRoles());
+
+    }
+
+    public MantenimientoRolesMB() {
+
     }
 
     public MantRolDataMB getMantRolDataMB() {
@@ -49,29 +57,56 @@ public class MantenimientoRolesMB implements Serializable {
         this.mantRolDataMB = mantRolDataMB;
     }
 
-    public MantenimientoRolesMB() {
-    }
-
     public void onRowSelect(SelectEvent event) {
 
-        IFacadeRol roles = new FacadeRol();
-
-        if (roles != null) {
-            mantRolDataMB.setLroles(facadeMantRol.getAllRoles());
-        }
-        //mantRolDataMB.setUsuario(usuarioData.getSeleccion());
-        System.out.println(mantRolDataMB.getLroles().toString());
+        //mantRolDataMB.setSel_roles((Roles) event.getObject());
+        mantRolDataMB.setSel_roles(mantRolDataMB.getSel_roles());
 
     }
 
     public void limpiar() {
-        mantRolDataMB.setLroles(null);
         mantRolDataMB.setSel_roles(null);
+        mantRolDataMB.setSel_roles(new Roles());
         mantRolDataMB.setLroles(facadeMantRol.getAllRoles());
     }
 
+    public void grabar() {
+        try {
+            System.out.println("Llegó Aquí");
+            mantRolDataMB.getSel_roles().toString();
+            System.out.println("Llegó Acá");
+            facadeMantRol.guardarRol(mantRolDataMB.getSel_roles());
+            FacesMessage message = new FacesMessage(
+                    FacesMessage.SEVERITY_INFO,
+                    "Operación Exitosa",
+                    "Rol fue " + (mantRolDataMB.getSel_roles().getCodigo() == 0 ? "Guardado" : "Modificado") + " Exitosamente");
+            PrimeFaces.current().dialog().showMessageDynamic(message);
+            limpiar();
+        } catch (Exception exc) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al Guardar Roles de Usuario", exc.getCause().getMessage());
+            PrimeFaces.current().dialog().showMessageDynamic(message);
+            throw exc;
+        }
+    }
+
+    public void eliminar() {
+        try {
+            facadeMantRol.eliminaRol(mantRolDataMB.getSel_roles());
+            FacesMessage message = new FacesMessage(
+                    FacesMessage.SEVERITY_INFO,
+                    "Operación Exitosa",
+                    "Rol Eliminado Exitosamente");
+            PrimeFaces.current().dialog().showMessageDynamic(message);
+            limpiar();
+        } catch (Exception exc) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al eliminar Rol", exc.getCause().getMessage());
+            PrimeFaces.current().dialog().showMessageDynamic(message);
+            throw exc;
+        }
+    }
+
     public void salir() {
- 
+
     }
 
 }

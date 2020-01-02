@@ -14,33 +14,30 @@ and open the template in the editor.
     </h:head>
     <h:body>
 
-      <h:form id="frmMantenimientoRol">   
-        <h:panelGrid columns="4">
-            <p:commandButton id="btnNuevo" value="Nuevo" actionListener="#{MantenimientoRolesMB.limpiar()}" update=":frmContent:frmMantenimientoRol" process=":frmContent:frmMantenimientoRol" icon="fa fa-plus-circle" iconPos="right"/>
-            <p:commandButton id="btnAnular" value="Anular" icon="fa fa-times-circle-o" iconPos="right"/>
-            <p:commandButton id="btnEliminar" value="Eliminar" icon="fa fa-trash" iconPos="right"/>
-            <p:commandButton id="btnSalir" value="Salir"  icon="fa fa-reply" iconPos="right"/>
-        </h:panelGrid>
-            
+        <h:form id="frmMantenimientoRol">   
+            <h:panelGrid columns="4">
+                <p:commandButton id="btnNuevo" value="Nuevo" actionListener="#{mantenimientoRolesMB.limpiar()}" update=":frmContent:frmMantenimientoRol" process=":frmContent:frmMantenimientoRol" icon="fa fa-plus-circle" iconPos="right"/>
+                <p:commandButton id="btnEliminar" value="Eliminar" icon="fa fa-trash" iconPos="right"/>
+                <p:commandButton id="btnSalir" value="Salir"  icon="fa fa-reply" iconPos="right"/>
+            </h:panelGrid>
+
             <p:fieldset  legend="Roles del Sistema" style="margin-top: 30px">      
                 <h:panelGrid columns="2" cellpadding="5">
-                    <p:dataTable id="sorting" var="car" value="#{MantenimientoRolesMB.mantRolDataMB.rol}" sortBy="#{car.codigo}" selectionMode="single" selection="#{mantenimientoRolesMB.mantRolDataMB.rol}" rowKey="#{car.codigo}">
-                     <p:ajax event="rowSelect" listener="#{mantenimientoRolesMB.onRowSelect}" update=":frmContent:pnlContent"/>
-                        <p:column headerText="Codigo">
-                            <h:outputText value="#{car.codigo}" />
-
-                        </p:column>
+                    <p:dataTable id="sorting" var="car" value="#{mantenimientoRolesMB.mantRolDataMB.lroles}" sortBy="#{car.codigo}" selectionMode="single" selection="#{mantenimientoRolesMB.mantRolDataMB.sel_roles}" rowKey="#{car.codigo}">
+                        <p:ajax event="rowSelect" listener="#{mantenimientoRolesMB.onRowSelect}" update=":frmContent:pnlContent"/>
+                        <!-- 
+                                                <p:column headerText="Codigo">
+                                                    <h:outputLabel value="#{car.codigo}" />
+                                                </p:column>
+                        -->
                         <p:column headerText="Nombre">
-                            <h:outputText value="#{car.nombre}" />   
+                            <h:outputLabel value="#{car.nombre}" />   
                         </p:column>
                         <p:column headerText="Modulo">
                             <h:outputText value="#{car.modulo}" />
-
-
                         </p:column>
                         <p:column headerText="SuBmodulo">
                             <h:outputText value="#{car.submodulo}" />
-
                         </p:column>
                         <p:column headerText="Estado">
                             <h:outputText value="#{car.estado}" />
@@ -50,31 +47,31 @@ and open the template in the editor.
             </p:fieldset> 
 
 
-            <p:fieldset  legend="Nuevo Rol/ Editar Rol" style="width: min-content;margin-top: 10px">
-                <h:panelGrid columns="2">
+            <p:fieldset legend="Nuevo/Editar Rol" style="margin-top: 10px; width: fit-content" >
 
-                    <p:outputLabel  value = "Nombre"/>
-                    <p:inputText value="Mantenimiento de Roles" size="30" maxlength="20"/>
+                <p:outputLabel for="txtCodigo" value="Código:"/>
+                <p:inputText id="txtCodigo" value="#{mantenimientoRolesMB.mantRolDataMB.sel_roles.codigo}" size="10" readonly="true" maxlength="100"/>
 
-                    <p:outputLabel  value = "Modulo" />
-                    <p:selectOneMenu value = "#{MantenimientoRolesMB.mantRolDataMB.lroles}" style="width: 88%" autoWidth="true">
-                        <f:selectItem itemLabel="Inventario" />
-                    </p:selectOneMenu>
+                <p:outputLabel  value = "Nombre del Rol: " />
+                <p:inputText id="txtNombre" value="#{mantenimientoRolesMB.mantRolDataMB.sel_roles.nombre}" size="30" readonly="false" maxlength="100"/>
 
-                    <p:outputLabel  value = "SubModulo" />
-                    <p:selectOneMenu  value="Mantenimiento" style="width: 88%">
-                        <f:selectItem itemLabel="Mantenimento" />
-                    </p:selectOneMenu>
-                    
-                    <p:outputLabel  value = "Estado" />
-                    <p:selectOneMenu  value="Activo" style="width: 88%">
-                        <f:selectItem itemLabel="Activo" />
-                    </p:selectOneMenu>
+                <p:outputLabel  value = "Modulo: " />
+                <p:inputText id="txtModulo" value="#{mantenimientoRolesMB.mantRolDataMB.sel_roles.modulo}" size="30" readonly="false" maxlength="100"/>
 
-                    <p:commandButton id="btnGuardar" value="Guardar" icon="fa fa-save" iconPos="right"/>
-                    <p:commandButton id="btnCancelar" value="Cancelar" icon="fa fa-remove" iconPos="right"/>    
-                </h:panelGrid>
+                <p:outputLabel  value = "Submodulo: " />
+                <p:inputText id="txtsubModulo" value="#{mantenimientoRolesMB.mantRolDataMB.sel_roles.submodulo}" size="30" readonly="false" maxlength="100"/>
+
+                <p:outputLabel  value = "Estado: " />
+                <p:inputText value="#{mantenimientoRolesMB.mantRolDataMB.sel_roles.estado}" style="width: 88%"/>
+
+                <p:commandButton id="btnGrabarRol" value="Guardar" validateClient="true" action="#{mantenimientoRolesMB.grabar}" update=":frmContent:frmMantenimientoRol" process=":frmContent:frmMantenimientoRol" icon="fa fa-save" iconPos="right">
+                    <p:confirm header="Confirma Acción" message="¿Desea guardar el rol?" icon="fa fa-exclamation-triangle" />
+                </p:commandButton>
+                <p:commandButton id="btnEliminarRol" value="Eliminar" actionListener="#{mantenimientoRolesMB.eliminar()}" update=":frmContent:frmMantenimientoRol" process=":frmContent:frmMantenimientoRol" icon="fa fa-remove" iconPos="right"/>    
+                <p:commandButton id="btnCancelarRol" value="Cancelar" actionListener="#{mantenimientoRolesMB.limpiar()}" update=":frmContent:frmMantenimientoRol" process=":frmContent:frmMantenimientoRol" icon="fa fa-remove" iconPos="right"/>    
+
             </p:fieldset>
+
         </h:form>         
     </h:body>
 </html>

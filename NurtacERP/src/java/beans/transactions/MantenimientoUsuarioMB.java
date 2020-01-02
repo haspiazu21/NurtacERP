@@ -21,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import listeners.seguridad.SegUsuariosListener;
 import org.primefaces.PrimeFaces;
 
 /**
@@ -76,7 +77,12 @@ public class MantenimientoUsuarioMB implements Serializable {
     }
 
     public void grabar() {
+
         try {
+
+//            SegUsuariosListener usuario_ex = new SegUsuariosListener();
+//            usuario_ex.usuarioExiste(usuarioData.getUsuario().getNombre());
+
             facadeMantUsuario.guardarUsuario(usuarioData.getUsuario());
             FacesMessage message = new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
@@ -87,7 +93,7 @@ public class MantenimientoUsuarioMB implements Serializable {
         } catch (Exception exc) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al Guardar Usuario", exc.getCause().getMessage());
             PrimeFaces.current().dialog().showMessageDynamic(message);
-            throw exc;
+           
         }
     }
 
@@ -129,9 +135,9 @@ public class MantenimientoUsuarioMB implements Serializable {
             throw exc;
         }
     }
-    
-    public void salir(){
-        
+
+    public void salir() {
+
     }
 
 }
