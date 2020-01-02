@@ -18,6 +18,8 @@ public interface IRolesDAO {
     void create(SegRoles roles);
     
     void merge (SegRoles rol);
+    
+    void delete(int roles);
 
     List<SegRoles> findAll();
 

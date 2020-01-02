@@ -8,6 +8,7 @@ package dao.seguridad;
 import entities.general.GenEmpresas;
 import entities.seguridad.SegBitacora;
 import entities.seguridad.SegRoles;
+import entities.seguridad.SegUsuarios;
 import factory.FactoryEM;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class RolesDAO implements IRolesDAO {
         }
     }
 
-        @Override
+    @Override
     public void merge(SegRoles rol) {
         EntityManager em = null;
         try {
@@ -59,7 +60,25 @@ public class RolesDAO implements IRolesDAO {
             }
         }
     }
-    
+
+    public void delete(int rol_id) {
+        EntityManager em = null;
+        try {
+            em = FactoryEM.getEntityManager();
+            em.getTransaction().begin();
+            SegRoles d_rol = em.find(SegRoles.class, rol_id);
+            em.remove(d_rol);
+            em.getTransaction().commit();
+        } catch (Exception exc) {
+            throw exc;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+
+    }
+
     @Override
     public List<SegRoles> findAll() {
         EntityManager em = null;
