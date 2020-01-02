@@ -5,24 +5,15 @@
  */
 package facade;
 
-import dao.seguridad.IMenuDAO;
-import dao.seguridad.IModuloDAO;
 import dao.seguridad.IRolesDAO;
-import dao.seguridad.IUsuarioDAO;
 import dao.seguridad.RolesDAO;
-import entities.seguridad.SegGruposusuarios;
 import entities.seguridad.SegRoles;
-import entities.seguridad.SegUsuarios;
 import java.util.ArrayList;
 import java.util.List;
-import mappers.seguridad.IMenuItemMapper;
-import mappers.seguridad.IMenuMapper;
 import mappers.seguridad.IRolMapper;
-import mappers.seguridad.IUsuarioMapper;
 import mappers.seguridad.RolMapper;
-import modelo.seguridad.GrupoUsuario;
+import modelo.seguridad.Page;
 import modelo.seguridad.Roles;
-import modelo.seguridad.Usuario;
 
 /**
  *
@@ -42,7 +33,6 @@ public class FacadeRol implements IFacadeRol {
     public FacadeRol() {
 
         rolesDAO = new RolesDAO();
-
         rolesMapper = new RolMapper();
     }
 
@@ -52,10 +42,9 @@ public class FacadeRol implements IFacadeRol {
         List<Roles> roles = new ArrayList<>();
         List<SegRoles> entitiesrol = rolesDAO.findAll();
 
-        for (SegRoles entity : entitiesrol) {
-            Roles rol = rolesMapper.entityToModel(entity);
+        entitiesrol.stream().map((entity) -> rolesMapper.entityToModel(entity)).forEachOrdered((rol) -> {
             roles.add(rol);
-        }
+        });
         return roles;
     }
 
@@ -66,9 +55,21 @@ public class FacadeRol implements IFacadeRol {
         if (segRoles.getIdRol() == 0) {
             rolesDAO.create(segRoles);
         } else {
-            rolesDAO.create(segRoles);
+            rolesDAO.merge(segRoles);
         }
 
+    }
+
+    public void eliminaRol(Roles roles) {
+
+        SegRoles segRoles = rolesMapper.modelToEntity(roles);
+        rolesDAO.delete(segRoles.getIdRol());
+
+    }
+
+    @Override
+    public List<Page> getAllRoles(Roles sel_roles) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -10,7 +10,7 @@ package modelo.seguridad;
  * @author Lenovo
  */
 public class Roles {
-    
+
     private int codigo;
     private String nombre;
     private String modulo;
@@ -22,6 +22,14 @@ public class Roles {
 
     public Roles(int codigo, String nombre, String modulo, String submodulo, String Estado) {
         this.codigo = codigo;
+        this.nombre = nombre;
+        this.modulo = modulo;
+        this.submodulo = submodulo;
+        this.Estado = Estado;
+    }
+
+    public Roles(String nombre, String modulo, String submodulo, String Estado) {
+
         this.nombre = nombre;
         this.modulo = modulo;
         this.submodulo = submodulo;
@@ -67,7 +75,30 @@ public class Roles {
     public void setEstado(String Estado) {
         this.Estado = Estado;
     }
-    
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 71 * hash + this.codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Roles other = (Roles) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
+        return true;
+    }
+
 }
