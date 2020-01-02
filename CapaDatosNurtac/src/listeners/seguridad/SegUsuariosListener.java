@@ -19,13 +19,13 @@ import javax.persistence.TypedQuery;
 public class SegUsuariosListener {
 
     @PrePersist
-    public void usuarioExiste(SegUsuarios segUsuarios) throws UniqueException {
+    public void usuarioExiste(String segUsuarios) throws UniqueException {
         EntityManager em = null;
         try {
             em = FactoryEM.getEntityManager();
             em.getTransaction().begin();
             TypedQuery q = em.createNamedQuery("SegUsuarios.findByUsername", SegUsuarios.class);
-            q.setParameter("username", segUsuarios.getUsername());
+            q.setParameter("username", segUsuarios);
             if (q.getResultList().size() > 0) {
                 throw new UniqueException("Nombre de usuario ya existe");
             }
