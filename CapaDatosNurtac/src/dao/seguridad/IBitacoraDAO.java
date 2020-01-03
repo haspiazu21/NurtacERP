@@ -16,6 +16,10 @@ public interface IBitacoraDAO {
 
     void create(SegBitacora bitacora);
 
+    void merge(SegBitacora bitacora);
+
+    void delete(int id_bitacora);
+
     List<SegBitacora> findAll();
 
     int getNextId();

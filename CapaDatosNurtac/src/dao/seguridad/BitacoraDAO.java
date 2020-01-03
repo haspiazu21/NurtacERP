@@ -6,6 +6,7 @@
 package dao.seguridad;
 
 import entities.seguridad.SegBitacora;
+import entities.seguridad.SegRoles;
 import factory.FactoryEM;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +77,45 @@ public class BitacoraDAO implements IBitacoraDAO {
             }
         }
         return id;
+    }
+
+    @Override
+    public void merge(SegBitacora bitacora) {
+
+        EntityManager em = null;
+        try {
+            em = FactoryEM.getEntityManager();
+            em.getTransaction().begin();
+            em.find(SegBitacora.class, bitacora.getCodigo());
+            em.merge(bitacora);
+            em.getTransaction().commit();
+        } catch (Exception exc) {
+            throw exc;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+
+    }
+
+    @Override
+    public void delete(int id_bitacora) {
+
+        EntityManager em = null;
+        try {
+            em = FactoryEM.getEntityManager();
+            em.getTransaction().begin();
+            SegBitacora d_bitacora = em.find(SegBitacora.class, id_bitacora);
+            em.remove(d_bitacora);
+            em.getTransaction().commit();
+        } catch (Exception exc) {
+            throw exc;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
 }
