@@ -6,19 +6,16 @@
 package mappers.seguridad;
 
 import entities.seguridad.SegRoles;
-import entities.seguridad.SegUsuarios;
 import modelo.seguridad.Roles;
-import modelo.seguridad.Usuario;
 
 /**
  *
- * @author Tia
+ * @author hac
  */
 public interface IRolMapper {
 
     Roles entityToModel(SegRoles rolesEntity);
-    
+
     SegRoles modelToEntity(Roles uroles);
-    
 
 }

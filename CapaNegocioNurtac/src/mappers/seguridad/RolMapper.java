@@ -13,7 +13,7 @@ import modelo.seguridad.Usuario;
 
 /**
  *
- * @author Tia
+ * @author hac
  */
 public class RolMapper implements IRolMapper {
 

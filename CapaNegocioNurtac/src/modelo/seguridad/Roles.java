@@ -7,7 +7,7 @@ package modelo.seguridad;
 
 /**
  *
- * @author Lenovo
+ * @author hac
  */
 public class Roles {
 
