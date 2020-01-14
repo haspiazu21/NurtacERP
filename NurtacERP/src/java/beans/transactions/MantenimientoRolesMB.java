@@ -29,7 +29,7 @@ import org.primefaces.event.SelectEvent;
  */
 @Named
 @ManagedBean
-@javax.faces.bean.RequestScoped
+@RequestScoped
 public class MantenimientoRolesMB implements Serializable {
 
     @Inject
@@ -38,8 +38,7 @@ public class MantenimientoRolesMB implements Serializable {
 
     @PostConstruct
     public void init() {
-
-        mantRolDataMB.setSel_roles(new Roles());
+        
         facadeMantRol = new FacadeRol();
         mantRolDataMB.setLroles(facadeMantRol.getAllRoles());
 
@@ -73,14 +72,15 @@ public class MantenimientoRolesMB implements Serializable {
     public void grabar() {
         try {
             System.out.println("Llegó Aquí");
-            mantRolDataMB.getSel_roles().toString();
-            System.out.println("Llegó Acá");
+            
+            
             facadeMantRol.guardarRol(mantRolDataMB.getSel_roles());
             FacesMessage message = new FacesMessage(
                     FacesMessage.SEVERITY_INFO,
                     "Operación Exitosa",
                     "Rol fue " + (mantRolDataMB.getSel_roles().getCodigo() == 0 ? "Guardado" : "Modificado") + " Exitosamente");
             PrimeFaces.current().dialog().showMessageDynamic(message);
+            System.out.println("Llegó Acá");
             limpiar();
         } catch (Exception exc) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al Guardar Roles de Usuario", exc.getCause().getMessage());

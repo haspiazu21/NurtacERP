@@ -53,7 +53,7 @@ and open the template in the editor.
                     <p:outputLabel for="txtNombre" value = "Nombre"/>
                     <p:inputText id="txtNombre" value="#{mantenimientoGrupoMB.mantGrpUsrDataMB.grupoUsuario.nombre}" size="30" maxlength="30"/>
                     <p:outputLabel for="txtDescripcion"  value = "Descripcion"/>
-                    <p:inputTextarea id="txtDescripcion" value="#{mantenimientoGrupoMB.mantGrpUsrDataMB.grupoUsuario.descripcion}" rows="5" cols="30" maxlength="30"/>
+                    <p:inputTextarea id="txtDescripcion" value="#{mantenimientoGrupoMB.mantGrpUsrDataMB.grupoUsuario.descripcion}" rows="5" cols="30" maxlength="100"/>
 
                     <p:commandButton id="btnGuardar" value="Guardar" validateClient="true" actionListener="#{mantenimientoGrupoMB.grabar}" update=":frmContent:frmMantenimiento" process=":frmContent:frmMantenimiento" icon="fa fa-save" iconPos="right">
                         <p:confirm header="Confirma Acción" message="¿Desea guardar el grupo de usuario?" icon="fa fa-exclamation-triangle" />

@@ -29,7 +29,7 @@ import org.primefaces.PrimeFaces;
  * @author Lenovo
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class MantenimientoUsuarioMB implements Serializable {
 
     @Inject

@@ -5,26 +5,30 @@
  */
 package listener;
 
-
+import beans.transactions.MenuMB;
+import facade.FacadeSeguridad;
+import facade.IFacadeSeguridad;
 import factory.FactoryEM;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-
+import javax.swing.JFrame;
 
 /**
  *
  * @author serbr
  */
 @WebListener
-public class FactoryWebListener implements ServletContextListener{
+public class FactoryWebListener implements ServletContextListener {
 
     
     
-    private FactoryWebListener(){
-        
+     MenuMB menuPrincipal;
+     
+    private FactoryWebListener() {
+
     }
-    
+
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         FactoryEM.inicializarFactory();
@@ -34,5 +38,11 @@ public class FactoryWebListener implements ServletContextListener{
     public void contextDestroyed(ServletContextEvent sce) {
         FactoryEM.destruirFactory();
     }
-    
+
+    public void closeSistema() {
+        System.exit(0);    
+    }
+
+
+
 }

@@ -5,8 +5,11 @@
  */
 package beans.data;
 
+import facade.FacadeRol;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import modelo.seguridad.Roles;
@@ -16,13 +19,16 @@ import modelo.seguridad.Roles;
  * @author Henry
  */
 @Named
-@ViewScoped
+@RequestScoped
 public class MantRolDataMB implements Serializable {
 
     private List<Roles> lroles;
     private Roles sel_roles;
-  
+    
+      
     public MantRolDataMB() {
+        
+        sel_roles = new Roles();
     }
 
     public List<Roles> getLroles() {
@@ -34,6 +40,9 @@ public class MantRolDataMB implements Serializable {
     }
 
     public Roles getSel_roles() {
+        if (sel_roles==null){
+            sel_roles=new Roles();
+        }
         return sel_roles;
     }
 
