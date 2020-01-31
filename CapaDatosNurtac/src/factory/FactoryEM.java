@@ -21,7 +21,7 @@ public class FactoryEM {
     }
 
     public static void inicializarFactory() {
-        emf = Persistence.createEntityManagerFactory("CapaDatosPU");
+        emf = Persistence.createEntityManagerFactory("CapaDatosPU1");
     }
 
     public static void destruirFactory() {

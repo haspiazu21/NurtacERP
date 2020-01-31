@@ -15,12 +15,12 @@
     <class>entities.seguridad.SegUsuarios</class>
     <class>entities.seguridad.SegRoles</class>
     <properties>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="javax.persistence.query.timeout" value="30"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Nurtac"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="postgres"/>
-      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      <property name="javax.persistence.query.timeout" value="30"/>
     </properties>
   </persistence-unit>
 </persistence>
